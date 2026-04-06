@@ -66,7 +66,7 @@ const HomePage = () => {
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-                <Link className="btn-ghost" to={localizePath("product")}>
+                <Link className="btn-ghost" to={localizePath("request-demo")}>
                   {t("hero.secondary")}
                 </Link>
               </motion.div>
