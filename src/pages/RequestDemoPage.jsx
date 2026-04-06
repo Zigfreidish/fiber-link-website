@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FiCheckCircle, FiClock, FiArrowUpRight, FiAlertCircle } from "react-icons/fi";
 import { useLocale } from "../contexts/LocaleContext";
 
-const requestEndpoint = import.meta.env.VITE_DEMO_REQUEST_ENDPOINT;
+const requestEndpoint = import.meta.env.VITE_DEMO_REQUEST_ENDPOINT || "https://formspree.io/f/xbdpqkvj";
 
 const RequestDemoPage = () => {
   const { t, dict, locale } = useLocale();
