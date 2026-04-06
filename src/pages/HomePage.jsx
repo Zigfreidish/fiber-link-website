@@ -1,43 +1,94 @@
 import { useMemo, useState } from "react";
-import { FiCalendar, FiHeart, FiInstagram, FiMail, FiSend, FiTwitter } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { FiCalendar, FiGlobe, FiMonitor, FiMoon, FiSend, FiSun } from "react-icons/fi";
 import { useLocale } from "../contexts/LocaleContext";
 import { useLocalePaths } from "../hooks/useLocalePaths";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
+import { supportedLocales } from "../i18n/strings";
+import HeroHeatmapCanvas from "../components/HeroHeatmapCanvas";
 
 const avatarPool = [
-  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=160&q=80",
-  "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=160&q=80",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80",
-  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=160&q=80",
+  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/hannah_lee/160/107_2.png",
+  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/mira_chen/160/94_2.png",
+  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/maya_tan/160/100_2.png",
+  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/ruby_ng/160/105_2.png",
+  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/felix_yu/160/108_2.png",
+  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/claire_ding/160/109_2.png",
 ];
 
 const HomePage = () => {
   const { t, dict, locale } = useLocale();
-  const { localizePath } = useLocalePaths();
+  const { localizePath, currentLocale, switchLocalePath } = useLocalePaths();
+  const { setMode, resolvedMode } = useTheme();
   const [email, setEmail] = useState("");
+  const [localeMenuOpen, setLocaleMenuOpen] = useState(false);
   const updates = useMemo(() => dict.hero?.updates || [], [dict]);
+
+  const modeIcon =
+    resolvedMode === "dark" ? <FiMoon size={16} /> : resolvedMode === "light" ? <FiSun size={16} /> : <FiMonitor size={16} />;
+
+  const cycleMode = () => {
+    if (resolvedMode === "system") setMode("light");
+    else if (resolvedMode === "light") setMode("dark");
+    else setMode("system");
+  };
 
   return (
     <main className="section-wrap innoflow-page inno-shell">
       <section className="innoflow-hero section">
-        <div className="innoflow-headline"> 
-          <img className="inno-top-logo" src="/brand/fiber-link-logo.jpg" alt="Fiber Link" />
-          <div className="inno-top-divider" />
-          <a className="inno-top-email" href={`mailto:${dict.hero?.contact || "hello@studiox.com"}`}>
-            <span className="email-dot" />
-            {dict.hero?.contact || "hello@studiox@gmail.com"}
-          </a>
-          <span className="inno-head-spacer" />
-          <a className="top-social" href="#" onClick={(event) => event.preventDefault()} aria-label="social links">
-            <FiInstagram size={16} />
-          </a>
-          <a className="top-social" href="#" onClick={(event) => event.preventDefault()} aria-label="social links">
-            <FiTwitter size={16} />
-          </a>
-          <a className="top-social" href="#" onClick={(event) => event.preventDefault()} aria-label="social links">
-            <FiHeart size={16} />
-          </a>
+        <HeroHeatmapCanvas />
+
+        <div className="innoflow-headline">
+          <div className="inno-top-logo-wrap">
+            <span className="brand-mark-heat" aria-hidden="true" />
+            <img className="inno-top-logo" src="/brand/fiber-link-logo.jpg" alt="Fiber Link logo" />
+          </div>
+
+          <div className="inno-top-left">
+            <Link className="inno-top-link" to={localizePath("")}>{t("nav.home")}</Link>
+          </div>
+
+          <Link className="inno-top-link request-demo-link-top" to={localizePath("request-demo")}>
+            {t("nav.requestDemo")}
+          </Link>
+
+          <button type="button" className="top-icon-btn" onClick={cycleMode} aria-label={t("labels.theme")}>
+            {modeIcon}
+          </button>
+
+          <div className="top-locale-wrap">
+            <button
+              type="button"
+              className="top-icon-btn"
+              onClick={() => setLocaleMenuOpen((open) => !open)}
+              aria-label={t("labels.locale")}
+            >
+              <FiGlobe size={16} />
+            </button>
+
+            <AnimatePresence>
+              {localeMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  className="inno-locale-drawer"
+                >
+                  {supportedLocales.map((item) => (
+                    <Link
+                      key={item}
+                      className={item === currentLocale || item === locale ? "active" : ""}
+                      to={switchLocalePath(item, "") }
+                      onClick={() => setLocaleMenuOpen(false)}
+                    >
+                      {item.toUpperCase()}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         <div className="innoflow-main">
@@ -57,6 +108,9 @@ const HomePage = () => {
             <Link className="inno-mailbox-link inno-mailbox-button" to={localizePath("request-demo")}>
               {t("labels.requestDemoTitle")} <FiSend size={14} />
             </Link>
+            <a className="inno-visit-demo" href="https://demo.fiberlink.me" target="_blank" rel="noreferrer">
+              Visit Demo
+            </a>
           </div>
 
           <div className="inno-proof">
@@ -72,6 +126,7 @@ const HomePage = () => {
 
       <section className="section section-surface innoflow-feed">
         <div className="announcements-head">
+          <span className="inno-dot" />
           <span>{t("hero.updateTitle")}</span>
         </div>
 
@@ -103,19 +158,6 @@ const HomePage = () => {
               </a>
             </motion.article>
           ))}
-        </div>
-      </section>
-
-      <section className="section section-footerbar inno-footer">
-        <div className="inno-footer-inner">
-          <p>{t("hero.community")}</p>
-          <a href={`mailto:${dict.hero?.contact || "hello@studiox@gmail.com"}`}>
-            <FiMail size={14} />
-            {dict.hero?.contact || "hello@studiox@gmail.com"}
-          </a>
-          <p>© {new Date().getFullYear()} Fiber Link</p>
-          <a href="#">Remix The Template</a>
-          <a href="#">Made in Framer</a>
         </div>
       </section>
     </main>
