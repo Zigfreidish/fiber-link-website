@@ -6,10 +6,11 @@ import SiteAtmosphere from "./SiteAtmosphere";
 
 const PageShell = () => {
   const location = useLocation();
+  const isHome = /^\/[^/]+\/?$/.test(location.pathname) && !location.pathname.endsWith("/request-demo") && !location.pathname.endsWith("/product") && !location.pathname.endsWith("/how-it-works");
 
   return (
     <div className="page-shell">
-      <SiteHeader />
+      {!isHome && <SiteHeader />}
       <main className="page-main">
         <SiteAtmosphere />
         <AnimatePresence mode="wait">
