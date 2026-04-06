@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { FiChevronDown, FiGithub, FiMenu, FiMoon, FiMonitor, FiSun, FiX } from "react-icons/fi";
+import { FiChevronDown, FiGithub, FiMenu, FiMoon, FiMonitor, FiSun, FiX, FiGlobe } from "react-icons/fi";
 import { useLocalePaths } from "../hooks/useLocalePaths";
 import { useTheme } from "../contexts/ThemeContext";
 import { navItems, supportedLocales } from "../i18n/strings";
@@ -11,38 +11,48 @@ const SiteHeader = () => {
   const { t, locale } = useLocale();
   const { switchLocalePath, localizePath } = useLocalePaths();
   const { setMode, resolvedMode } = useTheme();
-  const [open, setOpen] = useState(false);
+  const [openTheme, setOpenTheme] = useState(false);
+  const [openLocale, setOpenLocale] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
-  const utilityRef = useRef(null);
-  const base = `/${locale}`;
+  const themeRef = useRef(null);
+  const localeRef = useRef(null);
 
-  const themeLabels = {
+  const base = `/${locale}`;
+  const activePath = pathname.replace(base, "") || "/";
+
+  const themeLabel = {
     light: t("labels.light") || "Light",
     dark: t("labels.dark") || "Dark",
     system: t("labels.system") || "System",
   };
 
-  const activePath = pathname.replace(base, "") || "/";
-
   useEffect(() => {
     setMobileOpen(false);
-    setOpen(false);
+    setOpenTheme(false);
+    setOpenLocale(false);
   }, [pathname, locale]);
 
   useEffect(() => {
-    if (!open) return;
+    const closeAllMenus = () => {
+      setOpenTheme(false);
+      setOpenLocale(false);
+    };
 
     const handleDocumentClick = (event) => {
-      const utilityTarget = utilityRef.current;
-      if (!utilityTarget?.contains(event.target)) {
-        setOpen(false);
+      const target = event.target;
+      if (!themeRef.current?.contains(target) && !localeRef.current?.contains(target)) {
+        closeAllMenus();
       }
     };
 
-    document.addEventListener("mousedown", handleDocumentClick);
-    return () => document.removeEventListener("mousedown", handleDocumentClick);
-  }, [open]);
+    if (openTheme || openLocale) {
+      document.addEventListener("mousedown", handleDocumentClick);
+      return () => document.removeEventListener("mousedown", handleDocumentClick);
+    }
+
+    return undefined;
+  }, [openTheme, openLocale]);
 
   const navLinks = navItems.map((item) => {
     const path = item.slug ? `${base}/${item.slug}` : base;
@@ -50,7 +60,9 @@ const SiteHeader = () => {
       <NavLink
         key={item.key}
         to={path}
-        className={({ isActive }) => `nav-pill ${isActive ? "active" : ""} ${activePath === path.replace(base, "") ? "active" : ""}`}
+        className={({ isActive }) =>
+          `nav-pill ${isActive ? "active" : ""} ${activePath === path.replace(base, "") ? "active" : ""}`
+        }
         end={item.slug === ""}
       >
         <motion.span whileHover={{ y: -1 }} whileTap={{ y: 1 }}>
@@ -60,7 +72,8 @@ const SiteHeader = () => {
     );
   });
 
-  const utilityModeIcon = resolvedMode === "dark" ? <FiMoon size={15} /> : <FiSun size={15} />;
+  const isDark = resolvedMode === "dark";
+  const isSystem = resolvedMode === "system";
 
   return (
     <header className="site-header">
@@ -74,68 +87,91 @@ const SiteHeader = () => {
           {navLinks}
         </nav>
 
-        <div className="header-tools" ref={utilityRef}>
-          <div className="utility-pill-wrap">
-            <button type="button" className="utility-pill" aria-label={t("labels.locale") || "Language and theme menu"} onClick={() => setOpen((current) => !current)}>
-              {utilityModeIcon}
-              <span>{t("labels.theme")}</span>
-              <FiChevronDown size={14} className={open ? "open" : ""} />
+        <div className="header-tools">
+          <div className="utility-pill-wrap" ref={themeRef}>
+            <button
+              type="button"
+              className="utility-pill utility-icon-pill"
+              aria-label={t("labels.theme") || "Theme"}
+              onClick={() => {
+                setOpenLocale(false);
+                setOpenTheme((current) => !current);
+              }}
+            >
+              {isDark ? <FiMoon size={15} /> : <FiSun size={15} />}
+              <FiChevronDown size={14} className={openTheme ? "open" : ""} />
             </button>
             <AnimatePresence>
-              {open && (
+              {openTheme && (
                 <motion.div
                   className="utility-dropdown"
-                  initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                  initial={{ opacity: 0, y: -6, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.98 }}
                   transition={{ duration: 0.15 }}
                 >
-                  <div className="utility-section">
-                    <p>{t("labels.theme")}</p>
-                    <button type="button" className={resolvedMode === "system" ? "active" : ""} onClick={() => setMode("system")}>
-                      <FiMonitor size={14} />
-                      {themeLabels.system}
-                    </button>
-                    <button type="button" className={resolvedMode === "light" ? "active" : ""} onClick={() => setMode("light")}>
-                      <FiSun size={14} />
-                      {themeLabels.light}
-                    </button>
-                    <button type="button" className={resolvedMode === "dark" ? "active" : ""} onClick={() => setMode("dark")}>
-                      <FiMoon size={14} />
-                      {themeLabels.dark}
-                    </button>
-                  </div>
-
-                  <div className="utility-section">
-                    <p>{t("labels.locale") || "Language"}</p>
-                    <div className="utility-locale-links" aria-label={t("labels.locale") || "Language"}>
-                      {supportedLocales.map((item) => (
-                        <Link
-                          key={item}
-                          to={switchLocalePath(item, pathname.replace(/^\/[^/]+/, ""))}
-                          className={locale === item ? "active-locale" : ""}
-                          onClick={() => setOpen(false)}
-                        >
-                          {item.toUpperCase()}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  <a
-                    className="utility-link"
-                    href="https://github.com/Keith-CY/fiber-link"
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() => setOpen(false)}
-                  >
-                    <FiGithub size={16} />
-                    {t("nav.source")}
-                  </a>
+                  <button type="button" className={isSystem ? "active" : ""} onClick={() => setMode("system")}>
+                    <FiMonitor size={14} /> {themeLabel.system}
+                  </button>
+                  <button type="button" className={resolvedMode === "light" ? "active" : ""} onClick={() => setMode("light")}>
+                    <FiSun size={14} /> {themeLabel.light}
+                  </button>
+                  <button type="button" className={resolvedMode === "dark" ? "active" : ""} onClick={() => setMode("dark")}>
+                    <FiMoon size={14} /> {themeLabel.dark}
+                  </button>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
+
+          <div className="utility-pill-wrap" ref={localeRef}>
+            <button
+              type="button"
+              className="utility-pill utility-icon-pill"
+              aria-label={t("labels.locale") || "Language"}
+              onClick={() => {
+                setOpenTheme(false);
+                setOpenLocale((current) => !current);
+              }}
+            >
+              <FiGlobe size={15} />
+              <FiChevronDown size={14} className={openLocale ? "open" : ""} />
+            </button>
+            <AnimatePresence>
+              {openLocale && (
+                <motion.div
+                  className="utility-dropdown locale-dropdown"
+                  initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <div className="utility-locale-links" aria-label={t("labels.locale") || "Language"}>
+                    {supportedLocales.map((item) => (
+                      <Link
+                        key={item}
+                        to={switchLocalePath(item, pathname.replace(/^\/[^/]+/, ""))}
+                        className={locale === item ? "active-locale" : ""}
+                        onClick={() => setOpenLocale(false)}
+                      >
+                        {item.toUpperCase()}
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <a
+            className="utility-link"
+            href="https://github.com/Keith-CY/fiber-link"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
+            <FiGithub size={16} />
+          </a>
 
           <motion.div className="header-cta" whileHover={{ y: -1 }} whileTap={{ y: 1 }}>
             <Link className="btn-primary" to={localizePath("request-demo")}>
@@ -168,16 +204,17 @@ const SiteHeader = () => {
               <nav className="mobile-nav" aria-label="Mobile Main">
                 {navLinks}
               </nav>
+
               <div className="mobile-meta">
                 <div className="mobile-theme-row">
                   <button type="button" className="mobile-chip" onClick={() => setMode("system")}>
-                    <FiMonitor size={15} /> {themeLabels.system}
+                    <FiMonitor size={15} /> {themeLabel.system}
                   </button>
                   <button type="button" className="mobile-chip" onClick={() => setMode("light")}>
-                    <FiSun size={15} /> {themeLabels.light}
+                    <FiSun size={15} /> {themeLabel.light}
                   </button>
                   <button type="button" className="mobile-chip" onClick={() => setMode("dark")}>
-                    <FiMoon size={15} /> {themeLabels.dark}
+                    <FiMoon size={15} /> {themeLabel.dark}
                   </button>
                 </div>
                 <div className="mobile-locale-switch" aria-label={t("labels.locale") || "Language"}>
@@ -188,7 +225,7 @@ const SiteHeader = () => {
                   ))}
                 </div>
                 <a className="source-link" href="https://github.com/Keith-CY/fiber-link" target="_blank" rel="noreferrer">
-                  <FiGithub size={16} /> {t("nav.source")}
+                  <FiGithub size={16} /> GitHub
                 </a>
                 <Link className="btn-primary mobile-request-btn" to={localizePath("request-demo")}>
                   {t("nav.requestDemo")}

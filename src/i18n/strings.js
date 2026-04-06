@@ -19,7 +19,7 @@ export const translations = {
       howItWorks: "How It Works",
       faq: "FAQ",
       requestDemo: "Request Demo",
-      source: "Source",
+      source: "GitHub",
     },
     labels: {
       theme: "Theme",
@@ -201,15 +201,15 @@ export const translations = {
     },
     images: {
       home: {
-        query: "community creators economy",
+        query: "creator economy community",
         fallback: "/images/home-fallback.svg",
       },
       product: {
-        query: "payment dashboard",
+        query: "creator payout dashboard",
         fallback: "/images/product-fallback.svg",
       },
       how: {
-        query: "team collaboration",
+        query: "creator team collaboration",
         fallback: "/images/how-fallback.svg",
       },
     },
@@ -223,7 +223,7 @@ export const translations = {
       howItWorks: "工作原理",
       faq: "常见问题",
       requestDemo: "申请演示",
-      source: "源码",
+      source: "GitHub",
     },
     labels: {
       theme: "主题",
@@ -384,7 +384,7 @@ export const translations = {
       howItWorks: "使い方",
       faq: "FAQ",
       requestDemo: "デモ申請",
-      source: "ソース",
+      source: "GitHub",
     },
     labels: {
       theme: "テーマ",
@@ -497,7 +497,7 @@ export const translations = {
       howItWorks: "작동 방식",
       faq: "FAQ",
       requestDemo: "데모 요청",
-      source: "소스",
+      source: "GitHub",
     },
     labels: {
       theme: "테마",
