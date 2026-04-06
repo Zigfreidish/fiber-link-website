@@ -1,13 +1,14 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { FiCheckCircle, FiClock } from "react-icons/fi";
+import { FiCheckCircle, FiClock, FiArrowUpRight, FiAlertCircle } from "react-icons/fi";
 import { useLocale } from "../contexts/LocaleContext";
 
-const storageKey = "fiber-link-interest-v2";
+const requestEndpoint = import.meta.env.VITE_DEMO_REQUEST_ENDPOINT;
 
 const RequestDemoPage = () => {
   const { t, dict, locale } = useLocale();
   const [status, setStatus] = useState("idle");
+  const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,19 +19,45 @@ const RequestDemoPage = () => {
 
   const roleOptions = useMemo(() => dict.requestDemo.roleOptions || [], [dict]);
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+    setSubmitError("");
+    setStatus("submitting");
+
     const payload = {
       ...formData,
       locale,
-      createdAt: new Date().toISOString(),
+      requestedAt: new Date().toISOString(),
+      source: "fiberlink.me",
+      demoUrl: "https://demo.fiberlink.me",
     };
 
-    const current = JSON.parse(window.localStorage.getItem(storageKey) || "[]");
-    current.push(payload);
-    window.localStorage.setItem(storageKey, JSON.stringify(current));
-    setStatus("done");
-    setFormData({ name: "", email: "", organization: "", role: "", notes: "" });
+    if (!requestEndpoint) {
+      setStatus("idle");
+      setSubmitError(t("requestDemo.form.configMissing"));
+      return;
+    }
+
+    try {
+      const response = await fetch(requestEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed with ${response.status}`);
+      }
+
+      setStatus("done");
+      setFormData({ name: "", email: "", organization: "", role: "", notes: "" });
+    } catch (error) {
+      console.error(error);
+      setStatus("idle");
+      setSubmitError(t("requestDemo.form.error"));
+    }
   };
 
   const updateField = (key, value) => {
@@ -51,7 +78,8 @@ const RequestDemoPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2>{t("labels.comingSoon")}</h2>
+          <h2>{t("requestDemo.panelTitle")}</h2>
+          <p className="request-panel-copy">{t("requestDemo.panelCopy")}</p>
           <ul>
             {dict.requestDemo.steps.map((step) => (
               <li key={step}>
@@ -59,6 +87,9 @@ const RequestDemoPage = () => {
               </li>
             ))}
           </ul>
+          <a className="btn-ghost demo-preview-link" href="https://demo.fiberlink.me" target="_blank" rel="noreferrer">
+            <FiArrowUpRight size={16} /> {t("requestDemo.preview")}
+          </a>
         </motion.div>
 
         <motion.form
@@ -116,9 +147,15 @@ const RequestDemoPage = () => {
               placeholder={t("requestDemo.form.placeholderNotes")}
             />
           </label>
-          <button className="btn-primary" type="submit">
-            {t("requestDemo.form.submit")}
+          <button className="btn-primary" type="submit" disabled={status === "submitting"}>
+            {status === "submitting" ? t("requestDemo.form.submitting") : t("requestDemo.form.submit")}
           </button>
+          <p className="form-helper-copy">{t("requestDemo.form.helper")}</p>
+          {submitError && (
+            <p className="error-note">
+              <FiAlertCircle size={16} /> {submitError}
+            </p>
+          )}
           {status === "done" && (
             <p className="success-note">
               <FiCheckCircle size={16} /> {t("requestDemo.form.success")}
