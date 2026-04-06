@@ -28,13 +28,47 @@ export const translations = {
       openMenu: "Open menu",
       closeMenu: "Close menu",
     },
-    hero: {
-      eyebrow: "Creator networks, made simple",
-      title: "Ship creator rewards into your community in minutes.",
+        hero: {
+      eyebrow: "Early Access to App Before Launch",
+      title: "Fiber Link",
       description:
-        "Fiber Link is a lightweight payment channel for product communities. Start a frictionless flow for creators and keep your team in control.",
+        "Be first in line and experience the product before others. Apply for demo access and secure your slot.",
       primary: "Request Demo",
-      secondary: "Request Demo",
+      secondary: "hello@studiox@gmail.com",
+      joinText: "Request Demo",
+      footerTag: "Join, 10,000+, others on the waitlist",
+      updateTitle: "What’s happening",
+      updateSubtitle: "Latest announcements and release milestones.",
+      joinHeading: "Want first access?",
+      joinSubheading: "Apply now and we will review your request within one week.",
+      community: "Join Community",
+      social: "Follow Us",
+      updates: [
+        {
+          date: "12-03-2026",
+          title: "Beta Access V2",
+          desc:
+            "Beta Access for this platform will be released on April 15th, 2026. Everyone in the waitlist gets invited.",
+          author: "Luke, Co Founder",
+          authorUrl: "#",
+        },
+        {
+          date: "16-02-2026",
+          title: "Join Community",
+          desc:
+            "Join our community where you can get updates and support from the team.",
+          author: "Hary, Co Founder",
+          authorUrl: "#",
+        },
+        {
+          date: "12-02-2026",
+          title: "Follow On Socials",
+          desc:
+            "See behind-the-scenes and stay updated on our latest progress.",
+          author: "Luke, Co Founder",
+          authorUrl: "#",
+        },
+      ],
       highlights: [
         "Built for community operators",
         "Creator-first earning distribution",
@@ -48,6 +82,7 @@ export const translations = {
         "Community growth and contribution loops are reinforced naturally.",
       ],
     },
+
     product: {
       eyebrow: "The product",
       title: "A payment layer for communities, not a power-user wallet.",
@@ -230,17 +265,49 @@ export const translations = {
       openMenu: "打开菜单",
       closeMenu: "关闭菜单",
     },
-    hero: {
-      eyebrow: "更轻量的创作者激励方案",
-      title: "分钟级接入社区打赏与创作者收益。",
+        hero: {
+      eyebrow: "Launch your community rewards early",
+      title: "Fiber Link",
       description:
-        "Fiber Link 为社区产品提供轻量支付通道，让运营、创作者、成员三方协作更顺畅。",
+        "先加入等待列表，先于他人抢先体验产品。提交演示申请，即可锁定优先体验名额。",
       primary: "申请演示",
-      secondary: "申请演示",
+      secondary: "hello@studiox@gmail.com",
+      joinText: "申请演示",
+      footerTag: "已有 10,000+ 人加入预发布名单",
+      updateTitle: "最新动态",
+      updateSubtitle: "版本和上线公告。",
+      joinHeading: "想要优先体验？",
+      joinSubheading: "提交申请后 1 周内评估并回复。",
+      community: "加入社区",
+      social: "关注更新",
+      updates: [
+        {
+          date: "12-03-2026",
+          title: "Beta Access V2",
+          desc: "Beta 版本计划于 2026 年 4 月 15 日对外发布，等待列表用户将优先获得邀请。",
+          author: "Luke, Co Founder",
+          authorUrl: "#",
+        },
+        {
+          date: "16-02-2026",
+          title: "加入社区",
+          desc: "加入社群，获取产品动态和功能答疑。",
+          author: "Hary, Co Founder",
+          authorUrl: "#",
+        },
+        {
+          date: "12-02-2026",
+          title: "关注渠道",
+          desc: "关注实时进展，查看我们如何推进和发布。",
+          author: "Luke, Co Founder",
+          authorUrl: "#",
+        },
+      ],
       highlights: ["专为社区运营而建", "更清晰的创作者收益", "低摩擦即时支付"],
       cardTitle: "Fiber Link 能做到",
       cards: ["成员可一键支持创作者。", "管理员无需让每个用户学习复杂支付。", "创作者可见收益变化。", "持续激励让社区讨论更活跃。"],
     },
+
     product: {
       eyebrow: "产品说明",
       title: "我们提供面向社区的支付层，而不是钱包产品。",
@@ -389,16 +456,49 @@ export const translations = {
       openMenu: "メニューを開く",
       closeMenu: "メニューを閉じる",
     },
-    hero: {
-      eyebrow: "クリエイター報酬を、よりシンプルに",
-      title: "コミュニティへ短時間で報酬フローを追加。",
-      description: "Fiber Link はコミュニティ運営者向けの軽量ペイメントチャネル。運営体験を壊さず、報酬を導線化します。",
+        hero: {
+      eyebrow: "Launch early and stay in control",
+      title: "Fiber Link",
+      description:
+        "リストに参加して、先に製品体験へ。デモ申請で先行アクセス枠を確保できます。",
       primary: "デモ申請",
-      secondary: "デモを申請",
+      secondary: "hello@studiox@gmail.com",
+      joinText: "デモ申請",
+      footerTag: "10,000名以上が待機中",
+      updateTitle: "最新のアップデート",
+      updateSubtitle: "お知らせとリリース情報。",
+      joinHeading: "先行体験したいですか？",
+      joinSubheading: "申請後1週間以内に対応します。",
+      community: "コミュニティに参加",
+      social: "SNSをフォロー",
+      updates: [
+        {
+          date: "12-03-2026",
+          title: "ベータアクセス V2",
+          desc: "4月15日にベータアクセスを公開予定。待機中ユーザーに優先招待を配布。",
+          author: "Luke, Co Founder",
+          authorUrl: "#",
+        },
+        {
+          date: "16-02-2026",
+          title: "コミュニティ参加",
+          desc: "コミュニティで進捗情報とサポートを共有。",
+          author: "Hary, Co Founder",
+          authorUrl: "#",
+        },
+        {
+          date: "12-02-2026",
+          title: "SNSで更新",
+          desc: "舞台裏の進捗を公開し、開発情報を定期共有。",
+          author: "Luke, Co Founder",
+          authorUrl: "#",
+        },
+      ],
       highlights: ["運営者向けに設計", "クリエイター中心の収益設計", "高速・低摩擦の支払い"],
       cardTitle: "Fiber Link でできること",
       cards: ["投稿者へ即時ティップ", "運営の複雑さを吸収", "収益履歴を一目で確認", "コミュニティ健全性の促進"],
     },
+
     product: {
       eyebrow: "製品",
       title: "コミュニティのための決済レイヤー。",
@@ -500,16 +600,49 @@ export const translations = {
       openMenu: "메뉴 열기",
       closeMenu: "메뉴 닫기",
     },
-    hero: {
-      eyebrow: "커뮤니티 보상화를 더 간단하게",
-      title: "커뮤니티에 빠르게 보상 채널을 연결하세요.",
-      description: "Fiber Link는 가벼운 커뮤니티 결제 채널로, 운영 흐름을 유지한 채 창작자 보상을 즉시 시작할 수 있습니다.",
-      primary: "데모 요청",
-      secondary: "데모 신청",
+        hero: {
+      eyebrow: "기다림 없이 먼저 확인하세요",
+      title: "Fiber Link",
+      description:
+        "대기열에 가입하고 먼저 제품을 체험하세요. 데모 신청을 통해 우선 체험권을 확보할 수 있습니다.",
+      primary: "데모 신청",
+      secondary: "hello@studiox@gmail.com",
+      joinText: "데모 신청",
+      footerTag: "10,000명 이상이 대기 중",
+      updateTitle: "최근 소식",
+      updateSubtitle: "공지사항과 릴리즈 소식.",
+      joinHeading: "빠른 접근이 필요하세요?",
+      joinSubheading: "신청 후 1주 이내로 검토 후 안내해 드립니다.",
+      community: "커뮤니티 참여",
+      social: "SNS 팔로우",
+      updates: [
+        {
+          date: "12-03-2026",
+          title: "베타 접근 V2",
+          desc: "4월 15일 베타 접근을 공개 예정입니다. 대기자 우선 안내를 제공합니다.",
+          author: "Luke, Co Founder",
+          authorUrl: "#",
+        },
+        {
+          date: "16-02-2026",
+          title: "커뮤니티 참여",
+          desc: "커뮤니티에 참여하여 업데이트와 답변을 받아보세요.",
+          author: "Hary, Co Founder",
+          authorUrl: "#",
+        },
+        {
+          date: "12-02-2026",
+          title: "소셜 업데이트",
+          desc: "진행 상황을 배경으로 공유하고 최신 정보를 전달합니다.",
+          author: "Luke, Co Founder",
+          authorUrl: "#",
+        },
+      ],
       highlights: ["운영자가 관리하기 쉽게", "크리에이터 중심 정산 구조", "즉시 처리 가능한 지급"],
       cardTitle: "Fiber Link가 가능한 일",
       cards: ["멤버가 한 번에 창작자를 응원", "운영자는 지갑/온체인 복잡성은 신경 쓸 필요 없음", "크리에이터 수익 변화를 즉시 표시", "참여를 촉진하는 보상 루프 형성"],
     },
+
     product: {
       eyebrow: "제품 소개",
       title: "커뮤니티용 결제 레이어, 지갑형 제품이 아님.",
