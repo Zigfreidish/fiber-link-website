@@ -1,67 +1,83 @@
-# Fiber Link Website
+# Fiber Link Website (React)
 
-Marketing/product website for Fiber Link, including a landing page and a placeholder `Request Demo` flow.
+Production-ready multi-page Fiber Link website built with React, React Router, locale URL routing, and animated interactions.
 
-## What is included
+## Stack
 
-- Product landing page
-- Business-focused positioning and product copy
-- `Request Demo` section with a coming-soon interest form
-- Static-site deployment setup suitable for Coolify
+- React 18 + React Router DOM
+- Vite
+- GSAP for major motion/reveal sequences
+- anime.js for decorative micro-animation
+- Framer Motion for route and interaction polish
+- react-icons for iconography
 
-## Project structure
+## URL locale routing
 
-- `index.html` — main landing page
-- `styles.css` — site styling
-- `script.js` — placeholder Request Demo behavior
-- `Dockerfile` — static nginx container for deployment
-- `nginx.conf` — nginx config for Coolify/static hosting
+Locale is path-based and supported for:
 
-## Local preview
+- `en`
+- `zh`
+- `ja`
+- `ko`
 
-You can open `index.html` directly in a browser, or run a simple local web server.
+Examples:
 
-### Python
+- `/en`
+- `/zh/product`
+- `/ko/how-it-works`
+
+Unknown locale paths fallback to `/en`.
+
+## Theming
+
+Dark / Light / System mode is available from the top navigation.
+
+## Pages
+
+- `/[locale]` → Landing page
+- `/[locale]/product`
+- `/[locale]/use-cases`
+- `/[locale]/how-it-works`
+- `/[locale]/faq`
+- `/[locale]/request-demo`
+
+`Request Demo` is available from every page and keeps the current flow as a coming-soon collection form stored locally.
+
+## Image strategy / Unsplash fallback
+
+`CommunityVisual` attempts to use Unsplash random photo endpoints when a key is configured.
+
+- Set `VITE_UNSPLASH_ACCESS_KEY` to enable remote images.
+- If missing or failed, local curated SVG placeholders are used from `public/images/*`.
+- The fallback is non-blocking and does not prevent rendering or deployment.
+
+## Development
 
 ```bash
-python3 -m http.server 8080
+npm install
+npm run dev
 ```
 
-Then open `http://localhost:8080`.
+Open `http://localhost:5173/en`.
 
-## Request Demo behavior
+## Build
 
-Current behavior is intentionally marked as **coming soon**.
+```bash
+npm run build
+```
 
-- The form does **not** create real demo accounts yet.
-- Submissions are stored in browser `localStorage` only as a placeholder UX.
-- Future versions can replace this with a backend or external form endpoint.
+## Coolify deployment
 
-## Deploy with Coolify
+This repo is configured with a multi-stage Dockerfile for production image builds.
 
-This repo is designed to be easy to deploy as a static website.
+1. Install dependencies and run `npm run build`.
+2. Serve `/usr/share/nginx/html` from Nginx.
+3. Expose port `8080`.
 
-### Option A: Dockerfile deploy (recommended)
-
-In Coolify:
-
-1. Create a new application from this repo.
-2. Choose the repo branch you want to deploy.
-3. Use the included `Dockerfile`.
-4. Expose port `8080`.
-5. Deploy.
-
-### Option B: Static site / Nixpacks
-
-You can also serve the static files with another runtime, but the included Dockerfile is the simplest path.
+`nginx.conf` is already set to SPA fallback (`try_files`) for client-side routes.
 
 ## Notes
 
-This website is intentionally focused on:
-
-- community monetization
-- creator earnings
-- low-friction micropayments
-- admin-friendly adoption
-
-It is **not** positioned as a general wallet product.
+- `Home` is the landing page.
+- All major sections are converted into dedicated pages.
+- Request Demo remains a local interest flow and is explicitly marked as coming soon.
