@@ -7,7 +7,6 @@ export const navItems = [
   { slug: "use-cases", key: "useCases" },
   { slug: "how-it-works", key: "howItWorks" },
   { slug: "faq", key: "faq" },
-  { slug: "request-demo", key: "requestDemo" },
 ];
 
 export const translations = {

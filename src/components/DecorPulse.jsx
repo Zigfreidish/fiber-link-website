@@ -1,40 +1,59 @@
 import { useEffect, useRef } from "react";
 import anime from "animejs";
 
-const DecorPulse = () => {
+const DecorPulse = ({ variant = "hero" }) => {
   const ref = useRef(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
-    const nodes = ref.current.querySelectorAll(".decor-dot");
-    const timeline = anime
-      .timeline({
-        loop: true,
-        direction: "alternate",
-        easing: "easeInOutSine",
-      })
+    const dots = ref.current.querySelectorAll(".decor-dot");
+    const line = ref.current.querySelector(".decor-line");
+
+    const timeline = anime.timeline({
+      loop: true,
+      direction: "alternate",
+      autoplay: true,
+      easing: "easeInOutSine",
+    });
+
+    timeline
       .add({
-        targets: nodes,
-        translateY: [-6, 0],
-        scale: [0.95, 1.08],
-        opacity: [0.22, 0.85],
-        delay: anime.stagger(120),
-        duration: 1100,
+        targets: dots,
+        translateY: [-6, 6],
+        translateX: [-3, 3],
+        scale: [0.94, 1.12],
+        opacity: [0.2, 0.85],
+        delay: anime.stagger(85),
+        duration: 1350,
       })
-      .add({
-        targets: ".decor-line",
-        scaleX: [0.78, 1.06],
-        duration: 1200,
-        easing: "easeInOutQuad",
-      });
+      .add(
+        {
+          targets: line,
+          scaleX: [0.7, 1.06],
+          scaleY: [0.7, 1.1],
+          opacity: [0.12, 0.45],
+          duration: 1300,
+        },
+        "-=900",
+      )
+      .add(
+        {
+          targets: ref.current.querySelector(".decor-pulse-sheen"),
+          translateX: [-24, 24],
+          opacity: [0.1, 0.35, 0.08],
+          duration: 1800,
+        },
+        "-=1100",
+      );
 
     return () => timeline.pause();
   }, []);
 
   return (
-    <div className="hero-decoration" aria-hidden="true" ref={ref}>
+    <div className={`hero-decoration ${variant}`} aria-hidden="true" ref={ref}>
       <span className="decor-line" />
+      <span className="decor-pulse-sheen" />
       <span className="decor-dot" />
       <span className="decor-dot" />
       <span className="decor-dot" />

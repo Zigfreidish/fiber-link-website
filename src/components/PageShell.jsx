@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLocation, Outlet } from "react-router-dom";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
+import SiteAtmosphere from "./SiteAtmosphere";
 
 const PageShell = () => {
   const location = useLocation();
@@ -10,6 +11,7 @@ const PageShell = () => {
     <div className="page-shell">
       <SiteHeader />
       <main className="page-main">
+        <SiteAtmosphere />
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}

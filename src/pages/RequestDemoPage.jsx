@@ -157,12 +157,26 @@ const RequestDemoPage = () => {
             </p>
           )}
           {status === "done" && (
-            <p className="success-note">
+            <p className="success-note" role="status" aria-live="polite">
               <FiCheckCircle size={16} /> {t("requestDemo.form.success")}
             </p>
           )}
         </motion.form>
       </div>
+
+      {status === "done" && (
+        <motion.div
+          className="request-result-banner"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.08 }}
+          role="status"
+          aria-live="polite"
+        >
+          <strong>{t("requestDemo.successTitle") || "Request received"}</strong>
+          <p>{t("requestDemo.form.success")}</p>
+        </motion.div>
+      )}
     </section>
   );
 };
