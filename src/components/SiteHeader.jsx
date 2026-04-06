@@ -79,7 +79,7 @@ const SiteHeader = () => {
     <header className="site-header">
       <div className="header-shell">
         <Link className="brand" to={`/${locale}`} aria-label={t("brand")}>
-          <img className="brand-mark" src="/brand/fiber-link-logo.jpg" alt="Fiber Link logo" />
+          <div className="brand-mark-wrap"><span className="brand-mark-heat" aria-hidden="true" /><img className="brand-mark" src="/brand/fiber-link-logo.jpg" alt="Fiber Link logo" /></div>
           <span>{t("brand")}</span>
         </Link>
 

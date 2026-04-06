@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import anime from "animejs";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import HeroHeatmapCanvas from "../components/HeroHeatmapCanvas";
 import { gsap } from "gsap";
 import { FiArrowRight, FiShield, FiUsers, FiTrendingUp } from "react-icons/fi";
 import { useLocale } from "../contexts/LocaleContext";
@@ -53,7 +54,8 @@ const HomePage = () => {
 
   return (
     <FiberReveal className="section-wrap">
-      <section className="hero section" ref={heroRef}>
+      <section className="hero section hero-shader" ref={heroRef}>
+        <HeroHeatmapCanvas />
         <div className="panel-shell">
           <article className="hero-copy-block" data-reveal>
             <p className="eyebrow hero-eyebrow">{t("hero.eyebrow")}</p>
