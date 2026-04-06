@@ -550,6 +550,11 @@ button {
   border: 0;
 }
 
+.btn-primary,
+.btn-ghost {
+  white-space: nowrap;
+}
+
 .btn-primary {
   padding: 12px 18px;
   background: var(--blue-500);
@@ -1182,4 +1187,18 @@ select:focus {
   .site-atmosphere {
     opacity: 0.7;
   }
+}
+
+.text-link {
+  color: var(--blue-500);
+  text-decoration: none;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.request-page li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }

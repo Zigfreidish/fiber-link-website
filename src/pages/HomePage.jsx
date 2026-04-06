@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import anime from "animejs";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
@@ -13,6 +14,8 @@ const HomePage = () => {
   const { t, dict } = useLocale();
   const { localizePath } = useLocalePaths();
   const heroRef = useRef(null);
+  const metricRef = useRef(null);
+  const useCaseRef = useRef(null);
 
   useEffect(() => {
     if (!heroRef.current) return;
@@ -25,6 +28,27 @@ const HomePage = () => {
       stagger: 0.09,
       ease: "power3.out",
     });
+
+    if (metricRef.current) {
+      anime(metricRef.current.querySelectorAll(".metric-card"), {
+        opacity: [0, 1],
+        translateY: [22, 0],
+        delay: (el, i) => 100 + i * 80,
+        duration: 650,
+        easing: "easeOutCubic",
+      });
+    }
+
+    if (useCaseRef.current) {
+      anime(useCaseRef.current.querySelectorAll(".usecase-card"), {
+        opacity: [0, 1],
+        translateY: [20, 0],
+        scale: [0.99, 1],
+        delay: (el, i) => 180 + i * 80,
+        duration: 600,
+        easing: "easeOutQuart",
+      });
+    }
   }, []);
 
   return (
@@ -48,9 +72,15 @@ const HomePage = () => {
               </motion.div>
             </div>
             <ul className="hero-highlights hero-copy-item">
-              <li><FiShield size={16} /> {t("hero.highlights.0")}</li>
-              <li><FiUsers size={16} /> {t("hero.highlights.1")}</li>
-              <li><FiTrendingUp size={16} /> {t("hero.highlights.2")}</li>
+              <li>
+                <FiShield size={16} /> {t("hero.highlights.0")}
+              </li>
+              <li>
+                <FiUsers size={16} /> {t("hero.highlights.1")}
+              </li>
+              <li>
+                <FiTrendingUp size={16} /> {t("hero.highlights.2")}
+              </li>
             </ul>
           </article>
 
@@ -63,7 +93,7 @@ const HomePage = () => {
             <DecorPulse />
             <h2>{t("hero.cardTitle")}</h2>
             <p className="hero-mini">{t("product.visualCaption")}</p>
-            <div className="metric-grid">
+            <div className="metric-grid" ref={metricRef}>
               {dict.hero.cards.map((card, index) => (
                 <div key={card} data-reveal className="metric-card">
                   <strong>{`0${index + 1}`}</strong>
@@ -102,9 +132,9 @@ const HomePage = () => {
           <h2>{t("useCases.title")}</h2>
           <p>{t("useCases.description")}</p>
         </div>
-        <div className="two-col">
+        <div className="two-col" ref={useCaseRef}>
           {dict.useCases.cases.map((item) => (
-            <article key={item.title} className="card-surface" data-reveal>
+            <article key={item.title} className="card-surface usecase-card" data-reveal>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
             </article>

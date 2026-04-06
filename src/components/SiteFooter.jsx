@@ -19,9 +19,6 @@ const SiteFooter = () => {
           }} className="footer-link">
             <FiArrowUp size={16} /> Top
           </a>
-          <Link className="footer-link" to={localizePath("faq")}>
-            FAQ
-          </Link>
           <Link className="footer-link" to={localizePath("request-demo")}>
             <FiMail size={16} /> {t("nav.requestDemo")}
           </Link>

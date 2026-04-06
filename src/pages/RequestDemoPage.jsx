@@ -81,9 +81,18 @@ const RequestDemoPage = () => {
           <h2>{t("requestDemo.panelTitle")}</h2>
           <p className="request-panel-copy">{t("requestDemo.panelCopy")}</p>
           <ul>
-            {dict.requestDemo.steps.map((step) => (
+            {dict.requestDemo.steps.map((step, index) => (
               <li key={step}>
-                <FiClock size={16} /> {step}
+                <FiClock size={16} />
+                {index === 0 ? (
+                  <>
+                    {step} <a href="https://demo.fiberlink.me" target="_blank" rel="noreferrer" className="text-link">
+                      {t("requestDemo.preview")}
+                    </a>
+                  </>
+                ) : (
+                  step
+                )}
               </li>
             ))}
           </ul>
@@ -127,7 +136,7 @@ const RequestDemoPage = () => {
               required
             />
           </label>
-            <label>
+          <label>
             {t("requestDemo.form.role")}
             <select value={formData.role} onChange={(event) => updateField("role", event.target.value)} required>
               <option value="">Select one</option>

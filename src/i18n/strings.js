@@ -4,9 +4,7 @@ export const defaultLocale = "en";
 export const navItems = [
   { slug: "", key: "home" },
   { slug: "product", key: "product" },
-  { slug: "use-cases", key: "useCases" },
   { slug: "how-it-works", key: "howItWorks" },
-  { slug: "faq", key: "faq" },
 ];
 
 export const translations = {
@@ -15,9 +13,7 @@ export const translations = {
     nav: {
       home: "Home",
       product: "Product",
-      useCases: "Use Cases",
       howItWorks: "How It Works",
-      faq: "FAQ",
       requestDemo: "Request Demo",
       source: "GitHub",
     },
@@ -103,10 +99,10 @@ export const translations = {
       ],
     },
     howItWorks: {
-      eyebrow: "How it works",
-      title: "Web2-feeling product flow built on a specialized micropayment rail.",
+      eyebrow: "Fiber Network",
+      title: "Fiber Network as a Payment Channel for your community infrastructure.",
       description:
-        "Keep your existing community product intact. We add one clean value layer for member support.",
+        "Fiber Network exposes a payment channel for creator rewards and contributor economics while your community UI remains in control.",
       steps: [
         {
           title: "Community activates Fiber Link",
@@ -160,9 +156,9 @@ export const translations = {
       panelTitle: "How demo access works",
       panelCopy:
         "This is a standard startup-style demo request flow: preview first, request access, then get contacted by our team.",
-      preview: "Preview the product at demo.fiberlink.me",
+      preview: "Demo",
       steps: [
-        "Preview the live product experience at demo.fiberlink.me",
+        "Preview the live product experience at ",
         "Submit your team details and intended use case",
         "We review requests and respond within one week",
         "Approved teams receive manually provisioned demo accounts",
@@ -219,9 +215,7 @@ export const translations = {
     nav: {
       home: "首页",
       product: "产品",
-      useCases: "使用场景",
       howItWorks: "工作原理",
-      faq: "常见问题",
       requestDemo: "申请演示",
       source: "GitHub",
     },
@@ -298,8 +292,8 @@ export const translations = {
     },
     howItWorks: {
       eyebrow: "工作原理",
-      title: "将传统体验保留，同时接入更高效支付能力。",
-      description: "我们不替换你的社区产品，而是在其上扩展支付层，保留原有体验。",
+      title: "Fiber Network：社区支付通道架构。",
+      description: "Fiber Network 将创作者支付能力作为可插拔通道接入，让社区保持原有产品体验的同时完成付款与分账。",
       steps: [
         {
           title: "社区接入 Fiber Link",
@@ -344,8 +338,8 @@ export const translations = {
       description: "你可以先访问 demo.fiberlink.me 预览产品，但目前还未开放自助注册。提交申请后，我们会评估你的使用场景，在一周内联系你，并为合适的团队手动开通演示账户。",
       panelTitle: "演示申请流程",
       panelCopy: "这是一条标准 startup demo request 流程：先预览，再申请，由我们人工联系并开通。",
-      preview: "前往 demo.fiberlink.me 预览产品",
-      steps: ["先在 demo.fiberlink.me 预览产品体验", "提交团队信息与预期使用场景", "我们会在一周内完成审核并联系你", "通过审核的团队将收到手动开通的演示账户"],
+      preview: "Demo",
+      steps: ["先在", "提交团队信息与预期使用场景", "我们会在一周内完成审核并联系你", "通过审核的团队将收到手动开通的演示账户"],
       form: {
         name: "姓名",
         email: "工作邮箱",
@@ -380,9 +374,7 @@ export const translations = {
     nav: {
       home: "ホーム",
       product: "プロダクト",
-      useCases: "ユースケース",
       howItWorks: "使い方",
-      faq: "FAQ",
       requestDemo: "デモ申請",
       source: "GitHub",
     },
@@ -431,9 +423,9 @@ export const translations = {
       ],
     },
     howItWorks: {
-      eyebrow: "動作原理",
-      title: "既存 UI の文脈を保ちながら決済を追加。",
-      description: "コミュニティ体験を壊さず、支持の流れをそのまま報酬化へ変換します。",
+      eyebrow: "Fiber Network",
+      title: "Fiber Network はコミュニティ向け決済チャネルです。",
+      description: "Fiber Network はコミュニティの既存 UX を残したまま、貢献価値を決済フローへ変換する支払いチャネルを提供します。",
       steps: [
         { title: "接続", description: "管理者がプラットフォームに接続し、支援ルールを有効化。" },
         { title: "現場での支援", description: "投稿・スレッド内で即座に支援が行われます。" },
@@ -457,8 +449,8 @@ export const translations = {
       description: "demo.fiberlink.me で製品はプレビューできますが、セルフサインアップはまだ公開していません。申請内容を確認後、1週間以内にご連絡し、適切なチームには手動でデモアカウントを発行します。",
       panelTitle: "デモ申請の流れ",
       panelCopy: "一般的な startup の demo request と同じく、まずプレビューし、その後に申請・審査・案内を行います。",
-      preview: "demo.fiberlink.me をプレビューする",
-      steps: ["demo.fiberlink.me で製品体験を確認", "チーム情報と利用目的を送信", "1週間以内に審査とご連絡", "承認されたチームへ手動でデモアカウントを発行"],
+      preview: "Demo",
+      steps: ["まず", "チーム情報と利用目的を送信", "1週間以内に審査とご連絡", "承認されたチームへ手動でデモアカウントを発行"],
       form: {
         name: "お名前",
         email: "メールアドレス",
@@ -493,9 +485,7 @@ export const translations = {
     nav: {
       home: "홈",
       product: "제품",
-      useCases: "활용 사례",
       howItWorks: "작동 방식",
-      faq: "FAQ",
       requestDemo: "데모 요청",
       source: "GitHub",
     },
@@ -545,8 +535,8 @@ export const translations = {
     },
     howItWorks: {
       eyebrow: "작동 방식",
-      title: "기존 경험을 유지하고 결제 기능만 추가합니다.",
-      description: "커뮤니티 플로우는 그대로, 결제와 수익화만 자연스럽게 덧입히는 전략입니다.",
+      title: "Fiber Network 결제 채널 아키텍처.",
+      description: "Fiber Network는 기존 커뮤니티 UI를 변경하지 않고, 창작자 보상/결제 채널을 연결하는 결제 레이어를 제공합니다.",
       steps: [
         { title: "커뮤니티 연결", description: "운영자가 통합 설정을 마치고 결제 규칙을 적용합니다." },
         { title: "콘텐츠 내 지지", description: "멤버는 컨텍스트 내에서 바로 팁/지원을 보낼 수 있습니다." },
@@ -570,8 +560,8 @@ export const translations = {
       description: "demo.fiberlink.me 에서 제품을 미리 볼 수 있지만, 셀프 회원가입은 아직 열려 있지 않습니다. 요청을 제출하면 저희가 사용 사례를 검토하고 1주일 이내에 연락드리며, 적합한 팀에는 데모 계정을 수동으로 개설합니다.",
       panelTitle: "데모 요청 절차",
       panelCopy: "일반적인 startup 데모 요청과 같은 흐름입니다. 먼저 미리 보고, 신청 후 팀이 검토하고 계정을 열어드립니다.",
-      preview: "demo.fiberlink.me 미리 보기",
-      steps: ["demo.fiberlink.me 에서 제품을 먼저 확인", "팀 정보와 사용 목적을 제출", "1주일 이내에 검토 후 연락", "승인된 팀에 수동으로 데모 계정 개설"],
+      preview: "Demo",
+      steps: ["먼저", "팀 정보와 사용 목적을 제출", "1주일 이내에 검토 후 연락", "승인된 팀에 수동으로 데모 계정 개설"],
       form: {
         name: "이름",
         email: "업무용 이메일",

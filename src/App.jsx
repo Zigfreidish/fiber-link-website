@@ -5,9 +5,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import PageShell from "./components/PageShell";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
-import UseCasesPage from "./pages/UseCasesPage";
 import HowItWorksPage from "./pages/HowItWorksPage";
-import FaqPage from "./pages/FaqPage";
 import RequestDemoPage from "./pages/RequestDemoPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -36,9 +34,7 @@ const App = () => {
         <Route path="/:locale" element={<LocaleRouteGuard />}>
           <Route index element={<HomePage />} />
           <Route path="product" element={<ProductPage />} />
-          <Route path="use-cases" element={<UseCasesPage />} />
           <Route path="how-it-works" element={<HowItWorksPage />} />
-          <Route path="faq" element={<FaqPage />} />
           <Route path="request-demo" element={<RequestDemoPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
