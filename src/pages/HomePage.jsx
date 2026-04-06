@@ -45,23 +45,19 @@ const HomePage = () => {
           <h1>{t("hero.title")}</h1>
           <p className="inno-description">{t("hero.description")}</p>
 
-          <form
-            className="inno-mailbox"
-            onSubmit={(event) => {
-              event.preventDefault();
-            }}
-          >
+          <div className="inno-mailbox">
             <input
               type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder={locale === "zh" ? "you@email.com" : "Your email"}
               required
+              aria-label="Email"
             />
             <Link className="inno-mailbox-link inno-mailbox-button" to={localizePath("request-demo")}>
               {t("labels.requestDemoTitle")} <FiSend size={14} />
             </Link>
-          </form>
+          </div>
 
           <div className="inno-proof">
             <div className="avatar-stack" aria-hidden="true">

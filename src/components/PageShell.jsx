@@ -24,7 +24,7 @@ const PageShell = () => {
           </motion.div>
         </AnimatePresence>
       </main>
-      <SiteFooter />
+      {!isHome && <SiteFooter />}
     </div>
   );
 };
