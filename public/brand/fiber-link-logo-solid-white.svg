@@ -1,11 +1,12 @@
-<svg width="500" height="566" viewBox="0 0 500 566" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path
-    d="M250 18C122.98 18 20 120.98 20 248C20 375.02 122.98 478 250 478C377.02 478 480 375.02 480 248C480 120.98 377.02 18 250 18ZM250 82C341.68 82 416 156.32 416 248C416 339.68 341.68 414 250 414C158.32 414 84 339.68 84 248C84 156.32 158.32 82 250 82Z"
-    fill="white"
-  />
-  <path
-    d="M152 220H300C326.51 220 348 241.49 348 268C348 294.51 326.51 316 300 316H216V370H152V220Z"
-    fill="white"
-  />
-  <path d="M152 500H348V548H152V500Z" fill="white" />
+<svg
+  width="500"
+  height="566"
+  viewBox="0 0 500 566"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <mask id="fiber-link-mark-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="500" height="566">
+    <image href="/brand/fiber-link-logo.png" x="0" y="0" width="500" height="566" />
+  </mask>
+  <rect x="0" y="0" width="500" height="566" fill="white" mask="url(#fiber-link-mark-mask)" />
 </svg>
