@@ -1,4 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FiGlobe, FiMonitor, FiMoon, FiSun } from "react-icons/fi";
 import { useLocale } from "../contexts/LocaleContext";
 import { useLocalePaths, localeFromPath } from "../hooks/useLocalePaths";
@@ -10,7 +13,7 @@ const SiteHeader = () => {
   const { t, locale } = useLocale();
   const { localizePath, currentLocale, switchLocalePath } = useLocalePaths();
   const { setMode, resolvedMode } = useTheme();
-  const { pathname } = useLocation();
+  const pathname = usePathname();
   const [localeOpen, setLocaleOpen] = useState(false);
 
   const currentSlug = useMemo(() => localeFromPath(pathname), [pathname]);
@@ -24,7 +27,7 @@ const SiteHeader = () => {
   return (
     <header className="site-header">
       <div className="header-shell">
-        <Link className="brand" to={`/${currentLocale}`} aria-label={t("brand")}>
+        <Link className="brand" href={`/${currentLocale}`} aria-label={t("brand")}>
           <div className="brand-mark-wrap">
             <span className="brand-mark-heat" aria-hidden="true" />
             <img className="brand-mark" src="/brand/fiber-link-logo.jpg" alt="Fiber Link logo" />
@@ -33,21 +36,35 @@ const SiteHeader = () => {
         </Link>
 
         <nav className="main-nav" aria-label="Main">
-          <Link className={`nav-pill ${currentSlug === "" ? "active" : ""}`} to={localizePath("")}>
+          <Link className={`nav-pill ${currentSlug === "" ? "active" : ""}`} href={localizePath("")}>
             {t("nav.home")}
           </Link>
-          <Link className={`nav-pill ${currentSlug === "request-demo" ? "active" : ""}`} to={localizePath("request-demo")}>
+          <Link
+            className={`nav-pill ${currentSlug === "request-demo" ? "active" : ""}`}
+            href={localizePath("request-demo")}
+          >
             {t("nav.requestDemo")}
           </Link>
         </nav>
 
         <div className="header-tools">
           <button type="button" className="micro-btn" onClick={cycleMode} aria-label={t("labels.theme")}>
-            {resolvedMode === "dark" ? <FiMoon size={15} /> : resolvedMode === "light" ? <FiSun size={15} /> : <FiMonitor size={15} />}
+            {resolvedMode === "dark" ? (
+              <FiMoon size={15} />
+            ) : resolvedMode === "light" ? (
+              <FiSun size={15} />
+            ) : (
+              <FiMonitor size={15} />
+            )}
           </button>
 
           <div className="locale-switch" style={{ position: "relative" }}>
-            <button type="button" className="micro-btn" onClick={() => setLocaleOpen((open) => !open)} aria-label={t("labels.locale")}>
+            <button
+              type="button"
+              className="micro-btn"
+              onClick={() => setLocaleOpen((open) => !open)}
+              aria-label={t("labels.locale")}
+            >
               <FiGlobe size={15} />
             </button>
             {localeOpen && (
@@ -55,7 +72,7 @@ const SiteHeader = () => {
                 {supportedLocales.map((item) => (
                   <Link
                     key={item}
-                    to={switchLocalePath(item, currentSlug)}
+                    href={switchLocalePath(item, currentSlug)}
                     className={item === locale ? "active-locale" : ""}
                     onClick={() => setLocaleOpen(false)}
                   >

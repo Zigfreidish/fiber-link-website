@@ -1,7 +1,9 @@
+"use client";
+
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useLocale } from "../contexts/LocaleContext";
 import { useLocalePaths } from "../hooks/useLocalePaths";
-import { Link } from "react-router-dom";
 import FiberReveal from "../components/FiberReveal";
 import CommunityVisual from "../components/CommunityVisual";
 
@@ -46,7 +48,7 @@ const ProductPage = () => {
         <div className="mini-cta">
           <h2>{t("requestDemo.title")}</h2>
           <p>{t("requestDemo.steps.0")}</p>
-          <Link className="btn-primary" to={localizePath("request-demo")}>
+          <Link className="btn-primary" href={localizePath("request-demo")}>
             {t("nav.requestDemo")}
           </Link>
         </div>

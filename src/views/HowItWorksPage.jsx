@@ -1,5 +1,7 @@
+"use client";
+
 import { FiArrowRight } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useLocale } from "../contexts/LocaleContext";
 import { useLocalePaths } from "../hooks/useLocalePaths";
 import FiberReveal from "../components/FiberReveal";
@@ -45,7 +47,7 @@ const HowItWorksPage = () => {
             <h2>{t("faq.cta")}</h2>
             <p>{t("labels.comingSoon")}</p>
           </div>
-          <Link className="btn-primary" to={localizePath("request-demo")}>
+          <Link className="btn-primary" href={localizePath("request-demo")}>
             {t("hero.primary")} <FiArrowRight />
           </Link>
         </div>

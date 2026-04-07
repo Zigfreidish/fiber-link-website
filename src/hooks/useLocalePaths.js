@@ -1,4 +1,6 @@
-import { useLocation } from "react-router-dom";
+"use client";
+
+import { usePathname } from "next/navigation";
 import { supportedLocales, defaultLocale } from "../i18n/strings";
 
 const supportedPattern = new RegExp(`^/(${supportedLocales.join("|")})(?:/|$)`);
@@ -14,19 +16,19 @@ export const localizeSlugPath = (locale, pathName = "") => {
 };
 
 export const useLocalePaths = () => {
-  const location = useLocation();
-  const currentLocale = localeFromPath(location.pathname);
+  const pathname = usePathname();
+  const currentLocale = localeFromPath(pathname);
 
   const switchLocalePath = (nextLocale, nextSlug = "") => {
     const slug = nextSlug
       ? nextSlug.replace(/^\//, "")
-      : location.pathname.replace(supportedPattern, "").replace(/^\//, "");
+      : pathname.replace(supportedPattern, "").replace(/^\//, "");
 
     return slug ? `/${nextLocale}/${slug}` : `/${nextLocale}`;
   };
 
   const localizePath = (nextSlug = "") =>
-    nextSlug ? switchLocalePath(currentLocale, nextSlug) : localizeSlugPath(currentLocale, location.pathname);
+    nextSlug ? switchLocalePath(currentLocale, nextSlug) : localizeSlugPath(currentLocale, pathname);
 
   return {
     currentLocale,

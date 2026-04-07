@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext, useMemo } from "react";
 import { defaultLocale, getTranslation, translations } from "../i18n/strings";
 

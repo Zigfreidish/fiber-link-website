@@ -1,24 +1,26 @@
 {
   "name": "fiber-link-react-site",
   "private": true,
-  "version": "2.0.0",
+  "version": "3.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0 --port 4173"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "animejs": "^3.2.2",
-    "framer-motion": "^12.23.12",
-    "gsap": "^3.12.7",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-icons": "^5.5.0",
-    "react-router-dom": "^6.30.1"
+    "@paper-design/shaders-react": "^0.0.72",
+    "animejs": "4.3.6",
+    "framer-motion": "12.38.0",
+    "gsap": "3.14.2",
+    "next": "15.3.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-icons": "5.6.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.0.4",
-    "vite": "8.0.3"
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19"
   }
 }

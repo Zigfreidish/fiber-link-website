@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const STORAGE_KEY = "fiber-link-theme-mode";
@@ -9,12 +11,13 @@ const ThemeContext = createContext({
 });
 
 export const ThemeProvider = ({ children }) => {
-  const [mode, setModeState] = useState(() => {
-    if (typeof window === "undefined") return "system";
-    return window.localStorage.getItem(STORAGE_KEY) || "system";
-  });
-
+  const [mode, setModeState] = useState("system");
   const [resolvedMode, setResolvedMode] = useState("light");
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (stored) setModeState(stored);
+  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -40,9 +43,7 @@ export const ThemeProvider = ({ children }) => {
     window.localStorage.setItem(STORAGE_KEY, mode);
   }, [mode]);
 
-  const setMode = (next) => {
-    setModeState(next);
-  };
+  const setMode = (next) => setModeState(next);
 
   const value = useMemo(
     () => ({

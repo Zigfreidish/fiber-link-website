@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useMemo, useState } from "react";
 
 const UNSPLASH_BASE = "https://api.unsplash.com/photos/random";
@@ -46,7 +48,7 @@ const fallbackImage = (query = "", fallback = "/images/home-fallback.svg") => {
 const CommunityVisual = ({ query, title, description, fallback }) => {
   const [src, setSrc] = useState(() => fallbackImage(query, fallback));
   const [loading, setLoading] = useState(false);
-  const unsplashKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+  const unsplashKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
   const backupSrc = useMemo(() => fallbackImage(query, fallback), [query, fallback]);
 
   useEffect(() => {
@@ -64,15 +66,11 @@ const CommunityVisual = ({ query, title, description, fallback }) => {
           `${UNSPLASH_BASE}?query=${encodeURIComponent(query)}&orientation=landscape&client_id=${unsplashKey}`,
           { signal: controller.signal },
         );
-        if (!response.ok) {
-          throw new Error("Unsplash unavailable");
-        }
+        if (!response.ok) throw new Error("Unsplash unavailable");
         const data = await response.json();
         const url = data?.urls?.small || backupSrc;
-        if (url) {
-          setSrc(url);
-        }
-      } catch (_error) {
+        if (url) setSrc(url);
+      } catch {
         setSrc(backupSrc);
       } finally {
         setLoading(false);
