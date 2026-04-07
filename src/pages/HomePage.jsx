@@ -1,94 +1,82 @@
-import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import { FiCalendar, FiGlobe, FiMonitor, FiMoon, FiSend, FiSun } from "react-icons/fi";
+import {
+  FiGlobe,
+  FiInstagram,
+  FiInfo,
+  FiMail,
+  FiMapPin,
+  FiMessageCircle,
+} from "react-icons/fi";
 import { useLocale } from "../contexts/LocaleContext";
 import { useLocalePaths } from "../hooks/useLocalePaths";
-import { useTheme } from "../contexts/ThemeContext";
-import { supportedLocales } from "../i18n/strings";
-import HeroHeatmapCanvas from "../components/HeroHeatmapCanvas";
 
-const avatarPool = [
-  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/hannah_lee/160/107_2.png",
-  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/mira_chen/160/94_2.png",
-  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/maya_tan/160/100_2.png",
-  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/ruby_ng/160/105_2.png",
-  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/felix_yu/160/108_2.png",
-  "https://demo.fiberlink.me/user_avatar/demo.fiberlink.me/claire_ding/160/109_2.png",
+const topAvatars = [
+  "https://framerusercontent.com/images/6hJrSISXOuw6XHbmBRCGFMIE78.png?width=403&height=403",
+  "https://framerusercontent.com/images/Ym3IuKDBwg0U6P3YdFiwaa2xKE.png?width=1668&height=1607",
+  "https://framerusercontent.com/images/zU4hhLtCQQrRV7D1ZZ3IKzyve2g.png?width=695&height=733",
+];
+
+const authors = [
+  "https://framerusercontent.com/images/UmaFwqCdgSxaNNd1llstoAzEI.jpg?width=898&height=1004",
+  "https://framerusercontent.com/images/Z3DY6qcEaDryS5ouAiUE3e0XBQ.jpeg?width=4000&height=6000",
+  "https://framerusercontent.com/images/UmaFwqCdgSxaNNd1llstoAzEI.jpg?width=898&height=1004",
+];
+
+const socialLinks = [
+  { href: "https://x.com/home", icon: FiMessageCircle, label: "x" },
+  { href: "https://www.instagram.com/", icon: FiInstagram, label: "instagram" },
+  { href: "https://www.facebook.com/", icon: FiGlobe, label: "facebook" },
+  { href: "https://github.com/Keith-CY/fiber-link", icon: FiInfo, label: "info" },
 ];
 
 const HomePage = () => {
-  const { t, dict, locale } = useLocale();
-  const { localizePath, currentLocale, switchLocalePath } = useLocalePaths();
-  const { setMode, resolvedMode } = useTheme();
-  const [email, setEmail] = useState("");
-  const [localeMenuOpen, setLocaleMenuOpen] = useState(false);
-  const updates = useMemo(() => dict.hero?.updates || [], [dict]);
-
-  const modeIcon =
-    resolvedMode === "dark" ? <FiMoon size={16} /> : resolvedMode === "light" ? <FiSun size={16} /> : <FiMonitor size={16} />;
-
-  const cycleMode = () => {
-    if (resolvedMode === "system") setMode("light");
-    else if (resolvedMode === "light") setMode("dark");
-    else setMode("system");
-  };
+  const { t, dict } = useLocale();
+  const { localizePath } = useLocalePaths();
+  const updates = [...(dict.hero?.updates || [])].sort((a, b) => {
+    const pa = Date.parse(a.date) || 0;
+    const pb = Date.parse(b.date) || 0;
+    if (pb !== pa) return pb - pa;
+    return (b.postNumber || 0) - (a.postNumber || 0);
+  });
 
   return (
     <main className="section-wrap innoflow-page inno-shell">
-      <section className="innoflow-hero section">
-        <HeroHeatmapCanvas />
+      <nav className="inno-nav" aria-label="Innoflow style top navigation">
+        <a className="inno-brand" href={localizePath("")}>
+          <img className="inno-brand-logo" src="/brand/fiber-link-logo.jpg" alt="Fiber Link logo" />
+        </a>
 
-        <div className="innoflow-headline">
-          <div className="inno-top-logo-wrap">
-            <span className="brand-mark-heat" aria-hidden="true" />
-            <img className="inno-top-logo" src="/brand/fiber-link-logo.jpg" alt="Fiber Link logo" />
-          </div>
+        <span className="inno-nav-divider" aria-hidden="true" />
 
-          <div className="inno-top-left">
-            <Link className="inno-top-link" to={localizePath("")}>{t("nav.home")}</Link>
-          </div>
+        <a className="inno-pill-underline" href="mailto:hello@studiox@gmail.com" target="_blank" rel="noreferrer">
+          <span className="inno-nav-dot" />
+          hello@studiox@gmail.com
+        </a>
 
-          <Link className="inno-top-link request-demo-link-top" to={localizePath("request-demo")}>
-            {t("nav.requestDemo")}
-          </Link>
+        <span className="inno-nav-spacer" aria-hidden="true" />
 
-          <button type="button" className="top-icon-btn" onClick={cycleMode} aria-label={t("labels.theme")}>
-            {modeIcon}
-          </button>
+        <span className="inno-social-divider" aria-hidden="true" />
 
-          <div className="top-locale-wrap">
-            <button
-              type="button"
-              className="top-icon-btn"
-              onClick={() => setLocaleMenuOpen((open) => !open)}
-              aria-label={t("labels.locale")}
-            >
-              <FiGlobe size={16} />
-            </button>
+        <div className="inno-top-socials" aria-label="social links">
+          {socialLinks.map((item) => {
+            const Icon = item.icon;
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.label}
+              >
+                <Icon size={16} />
+              </a>
+            );
+          })}
+        </div>
+      </nav>
 
-            <AnimatePresence>
-              {localeMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 6 }}
-                  className="inno-locale-drawer"
-                >
-                  {supportedLocales.map((item) => (
-                    <Link
-                      key={item}
-                      className={item === currentLocale || item === locale ? "active" : ""}
-                      to={switchLocalePath(item, "") }
-                      onClick={() => setLocaleMenuOpen(false)}
-                    >
-                      {item.toUpperCase()}
-                    </Link>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+      <section className="innoflow-hero section innoflow-ref">
+        <div className="inno-top-logo-wrap" aria-hidden="true">
+          <img className="inno-top-badge" src="/brand/fiber-link-logo.jpg" alt="Fiber Link logo" />
         </div>
 
         <div className="innoflow-main">
@@ -96,27 +84,20 @@ const HomePage = () => {
           <h1>{t("hero.title")}</h1>
           <p className="inno-description">{t("hero.description")}</p>
 
-          <div className="inno-mailbox">
-            <input
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder={locale === "zh" ? "you@email.com" : "Your email"}
-              required
-              aria-label="Email"
-            />
-            <Link className="inno-mailbox-link inno-mailbox-button" to={localizePath("request-demo")}>
-              {t("labels.requestDemoTitle")} <FiSend size={14} />
-            </Link>
-            <a className="inno-visit-demo" href="https://demo.fiberlink.me" target="_blank" rel="noreferrer">
-              Visit Demo
-            </a>
-          </div>
+          <form className="inno-mailbox" onSubmit={(e) => e.preventDefault()}>
+            <label className="inno-input-wrap">
+              <input required type="email" placeholder="Your email here" aria-label="Email" />
+            </label>
+            <button type="submit" className="inno-mailbox-button">
+              {t("hero.joinText")}
+              <span className="inno-arrow">↗</span>
+            </button>
+          </form>
 
           <div className="inno-proof">
             <div className="avatar-stack" aria-hidden="true">
-              {avatarPool.slice(0, 4).map((avatar) => (
-                <img key={avatar} src={avatar} alt="" />
+              {topAvatars.map((avatar) => (
+                <img key={avatar} src={avatar} alt="member avatar" />
               ))}
             </div>
             <span>{t("hero.footerTag")}</span>
@@ -132,31 +113,34 @@ const HomePage = () => {
 
         <div className="inno-feed">
           {updates.map((item, index) => (
-            <motion.article
-              key={`${item.title}-${index}`}
-              className="inno-item"
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-            >
-              <div className="inno-item-pill">
-                <FiCalendar size={14} />
-                {item.date}
+            <article className="inno-item" key={`${item.title}-${index}`}>
+              <div className="inno-item-pill" aria-hidden="true">
+                <FiMapPin size={17} className="inno-pin-icon" />
               </div>
+
               <div className="inno-item-body">
                 <h3>{item.title}</h3>
-                <p>{item.desc}</p>
+                <p className="inno-item-date inno-item-date-inline">
+                  <span className="inno-item-dot" />
+                  {item.date}
+                </p>
+                <p className="inno-item-text">{item.desc || item.text}</p>
+                {item.cta && item.ctaText ? (
+                  <a className="inno-item-cta" href={item.cta} target="_blank" rel="noopener noreferrer">
+                    {item.ctaText}
+                  </a>
+                ) : item.ctaText ? (
+                  <span className="inno-item-cta-placeholder">{item.ctaText}</span>
+                ) : null}
               </div>
-              <a className="inno-item-author" href={item.authorUrl || "#"}>
-                <img
-                  src={avatarPool[index % avatarPool.length]}
-                  alt="author"
-                  style={{ width: 28, height: 28, borderRadius: 999, objectFit: "cover" }}
-                />
-                <span>{item.author}</span>
-              </a>
-            </motion.article>
+
+              <div className="inno-item-side">
+                <a className="inno-item-author" href={item.authorUrl || "#"}>
+                  <img src={item.authorAvatar || authors[index % authors.length]} alt="author" />
+                  <span>{item.author}</span>
+                </a>
+              </div>
+            </article>
           ))}
         </div>
       </section>
