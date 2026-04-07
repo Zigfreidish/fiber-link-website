@@ -36,16 +36,16 @@ export default function HomePage() {
         {/* animated gradient badge → Request Demo */}
         <motion.div style={{ marginBottom: "40px" }} {...fadeUp(0.12)}>
           <AnimatedGradientBadge href={localizePath("request-demo")}>
-            Get Early Access
+            {t("hero.earlyAccess")}
           </AnimatedGradientBadge>
         </motion.div>
 
         <h1 className="hero-headline">
           <span className="hero-line-dark">
-            <ShutterText text="Payments" delay={0.18} accentColor="#2480e0" midColor="var(--on-surface)" />
+            <ShutterText text={t("hero.headlinePrimary")} delay={0.18} accentColor="#2480e0" midColor="var(--on-surface)" />
           </span>
           <span className="hero-line-muted">
-            <ShutterText text="Uncompromised" delay={0.3} accentColor="#3aa8f8" midColor="#8c8f90" />
+            <ShutterText text={t("hero.headlineSecondary")} delay={0.3} accentColor="#3aa8f8" midColor="#8c8f90" />
           </span>
         </h1>
 
@@ -63,7 +63,7 @@ export default function HomePage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t("hero.viewOnGithub")}
+            {t("hero.learnMore")}
           </a>
         </motion.div>
 

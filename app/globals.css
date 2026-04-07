@@ -287,23 +287,46 @@ img { display: block; }
 
 .hero-logo-wrap {
   display: block;
+  position: relative;
+  isolation: isolate;
 }
 
-/* MetallicPaint canvas — already has alpha:true WebGL context, no blend tricks needed */
-.metallic-logo-wrap {
+.hero-logo-glow {
+  position: absolute;
+  inset: 14%;
+  border-radius: 32%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(128, 206, 255, 0.38), transparent 58%),
+    radial-gradient(circle at 68% 74%, rgba(36, 128, 224, 0.24), transparent 62%);
+  filter: blur(12px);
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.hero-logo-shader {
+  position: absolute;
+  inset: 0;
   display: block;
+  z-index: 1;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
   overflow: hidden;
 }
 
-/* Light mode: multiply(white colorBack, light page-bg) → invisible */
-.hero-logo-wrap canvas {
-  display: block;
-  mix-blend-mode: multiply;
+[data-theme="dark"] .hero-logo-glow {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(128, 206, 255, 0.26), transparent 58%),
+    radial-gradient(circle at 68% 74%, rgba(36, 128, 224, 0.18), transparent 62%);
+  opacity: 0.78;
 }
 
-/* Dark mode: screen(black colorBack, dark page-bg) → invisible */
-[data-theme="dark"] .hero-logo-wrap canvas {
-  mix-blend-mode: screen;
+.hero-logo-shader canvas {
+  display: block;
+  background: transparent;
 }
 
 /* ── World Map Background ── */
@@ -315,7 +338,7 @@ img { display: block; }
   overflow: hidden;
   /* dots use currentColor — inherit from body */
   color: var(--on-surface);
-  opacity: 0.12;
+  opacity: 0.072;
   /* fade toward all edges so content doesn't fight the dots */
   mask-image: radial-gradient(
     ellipse 100% 85% at 50% 50%,
@@ -331,8 +354,12 @@ img { display: block; }
   );
 }
 
+.world-map-bg svg {
+  display: block;
+}
+
 [data-theme="dark"] .world-map-bg {
-  opacity: 0.18;
+  opacity: 0.108;
 }
 
 /* site-shell and all content must sit above the map */

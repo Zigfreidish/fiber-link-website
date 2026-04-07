@@ -21,7 +21,6 @@ export default function AppFooter() {
             />
             <span className="footer-brand-name">Fiber Link</span>
           </Link>
-          <span className="footer-sep" aria-hidden="true" />
           <span className="footer-copyright">
             © {year}{" "}
             <a

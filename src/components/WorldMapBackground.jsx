@@ -27,7 +27,7 @@ export default function WorldMapBackground() {
       >
         {/* ── world dots — use currentColor so they adapt to theme ── */}
         {points.map((p, i) => (
-          <circle key={i} cx={p.x} cy={p.y} r={0.2} fill="currentColor" />
+          <circle key={i} cx={p.x} cy={p.y} r={0.1} fill="currentColor" />
         ))}
 
         {/* ── city markers with SVG SMIL pulse ── */}

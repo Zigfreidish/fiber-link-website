@@ -19,11 +19,19 @@ export default function HeroLogo({ src = "/brand/fiber-link-logo.png", size = 96
 
   return (
     <div className="hero-logo-wrap" style={{ width: size, height: size }} aria-hidden="true">
+      <span className="hero-logo-glow" />
       <Heatmap
-        style={{ width: size, height: size, display: "block" }}
+        className="hero-logo-shader"
+        style={{
+          width: size,
+          height: size,
+          display: "block",
+          WebkitMaskImage: `url(${src})`,
+          maskImage: `url(${src})`,
+        }}
         image={src}
         colors={COLORS}
-        colorBack={isDark ? "#000000" : "#ffffff"}
+        colorBack={isDark ? "#00000000" : "#ffffff00"}
         contour={0.6}
         angle={20}
         noise={0}
