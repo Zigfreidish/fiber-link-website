@@ -11,6 +11,7 @@
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.72",
     "animejs": "4.3.6",
+    "dotted-map": "^3.1.0",
     "framer-motion": "12.38.0",
     "gsap": "3.14.2",
     "next": "15.3.0",

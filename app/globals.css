@@ -306,6 +306,42 @@ img { display: block; }
   mix-blend-mode: screen;
 }
 
+/* ── World Map Background ── */
+.world-map-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* dots use currentColor — inherit from body */
+  color: var(--on-surface);
+  opacity: 0.12;
+  /* fade toward all edges so content doesn't fight the dots */
+  mask-image: radial-gradient(
+    ellipse 100% 85% at 50% 50%,
+    black 0%,
+    black 40%,
+    transparent 80%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 100% 85% at 50% 50%,
+    black 0%,
+    black 40%,
+    transparent 80%
+  );
+}
+
+[data-theme="dark"] .world-map-bg {
+  opacity: 0.18;
+}
+
+/* site-shell and all content must sit above the map */
+.site-shell {
+  position: relative;
+  z-index: 1;
+}
+
+
 /* ── AnimatedGradientBadge (MagicUI port) ── */
 
 @keyframes agb-scroll {
@@ -517,18 +553,40 @@ img { display: block; }
   align-items: center;
   padding: 16px 40px;
   border-radius: var(--r-full);
-  background: var(--surface-high);
+  /* frosted glass */
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+              0 2px 12px rgba(45, 52, 53, 0.06);
   color: var(--on-surface);
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   text-decoration: none;
-  transition: background 0.15s, transform 0.14s;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.14s;
 }
 
 .btn-hero-secondary:hover {
-  background: var(--surface-highest);
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
+              0 4px 20px rgba(45, 52, 53, 0.1);
   transform: translateY(-1px);
+}
+
+[data-theme="dark"] .btn-hero-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+              0 2px 12px rgba(0, 0, 0, 0.2);
+  color: var(--on-surface);
+}
+
+[data-theme="dark"] .btn-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+              0 4px 20px rgba(0, 0, 0, 0.28);
 }
 
 
