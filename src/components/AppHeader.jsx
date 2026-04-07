@@ -1,28 +1,62 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLocale } from "../contexts/LocaleContext";
+import { useLocalePaths } from "../hooks/useLocalePaths";
+import BrandLogo from "./BrandLogo";
 import LocaleDropdown from "./LocaleDropdown";
 import ThemeDropdown from "./ThemeDropdown";
 
 export default function AppHeader() {
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
+  const { localizePath } = useLocalePaths();
+  const pathname = usePathname();
+
+  const navLinks = [
+    { slug: "product", label: t("nav.product") },
+    { slug: "how-it-works", label: t("nav.howItWorks") },
+    { slug: "faq", label: t("nav.faq") },
+  ];
 
   return (
     <header className="app-header">
       <div className="app-header-inner">
-        {/* ── left: logo + brand ── */}
-        <Link className="app-brand" href={`/${locale}`}>
-          <img
-            className="app-brand-logo"
-            src="/brand/fiber-link-logo.png"
-            alt="Fiber Link"
-          />
-          <span className="app-brand-name">Fiber Link</span>
-        </Link>
+        <div className="app-header-main">
+          {/* ── left: logo + brand ── */}
+          <Link className="app-brand" href={`/${locale}`}>
+            <BrandLogo
+              context="chrome"
+              className="app-brand-logo"
+              alt="Fiber Link"
+            />
+            <span className="app-brand-name">Fiber Link</span>
+          </Link>
 
-        {/* ── right: locale dropdown + theme dropdown ── */}
+          <nav className="app-nav" aria-label="Primary">
+            {navLinks.map((item) => {
+              const href = localizePath(item.slug);
+              const active = pathname === href;
+              return (
+                <Link
+                  key={item.slug}
+                  className={`app-nav-link${active ? " active" : ""}`}
+                  href={href}
+                  aria-current={active ? "page" : undefined}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* ── right: request demo + locale dropdown + theme dropdown ── */}
         <div className="app-header-tools">
+          <Link className="app-header-cta" href={localizePath("request-demo")}>
+            {t("nav.requestDemo")}
+          </Link>
+
           <LocaleDropdown />
           <ThemeDropdown />
         </div>

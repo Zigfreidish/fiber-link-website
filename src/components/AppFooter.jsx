@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLocale } from "../contexts/LocaleContext";
 import { useLocalePaths } from "../hooks/useLocalePaths";
+import BrandLogo from "./BrandLogo";
 
 export default function AppFooter() {
   const { locale, t } = useLocale();
@@ -14,9 +15,9 @@ export default function AppFooter() {
       <div className="app-footer-inner">
         <div className="footer-left">
           <Link className="footer-brand" href={`/${locale}`}>
-            <img
+            <BrandLogo
+              context="chrome"
               className="footer-brand-logo"
-              src="/brand/fiber-link-logo.png"
               alt="Fiber Link"
             />
             <span className="footer-brand-name">Fiber Link</span>
