@@ -66,10 +66,6 @@ export default function AmbientSignalScene({ className = "" }) {
       <span className="ambient-flow-packet ambient-flow-packet-primary ambient-flow-packet-upper ambient-flow-packet-2" />
       <span className="ambient-flow-packet ambient-flow-packet-secondary ambient-flow-packet-lower ambient-flow-packet-3" />
       <span className="ambient-flow-packet ambient-flow-packet-secondary ambient-flow-packet-lower ambient-flow-packet-4" />
-
-      <span className="ambient-flow-label ambient-flow-label-source">source</span>
-      <span className="ambient-flow-label ambient-flow-label-routing">routing</span>
-      <span className="ambient-flow-label ambient-flow-label-settlement">settlement</span>
     </div>
   );
 }

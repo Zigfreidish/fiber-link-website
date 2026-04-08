@@ -41,7 +41,7 @@ const HowItWorksPage = () => {
           <div className="cta-band">
             <div className="cta-band-copy">
               <p className="section-eyebrow">{t("requestDemo.eyebrow")}</p>
-              <h2>{t("faq.cta")}</h2>
+              <h2>{t("requestDemo.title")}</h2>
               <p>{t("requestDemo.panelCopy")}</p>
             </div>
 

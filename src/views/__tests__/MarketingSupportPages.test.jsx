@@ -29,6 +29,7 @@ vi.mock("../../contexts/LocaleContext", () => ({
         "howItWorks.description": "Fiber Network 将创作者支付能力作为可插拔通道接入。",
         "requestDemo.eyebrow": "抢先体验",
         "requestDemo.title": "申请 Fiber Link 抢先体验资格。",
+        "requestDemo.panelCopy": "当前采用邀请制体验流程：先预览产品，再提交申请，由团队审核后人工开通。",
         "faq.cta": "如果你有独特的场景，我们愿意先帮你画一版流程。",
         "nav.requestDemo": "抢先体验",
         "hero.primary": "抢先体验",
@@ -42,6 +43,31 @@ vi.mock("../../contexts/LocaleContext", () => ({
       },
       howItWorks: {
         steps: [{ title: "社区接入 Fiber Link", description: "管理员完成接入。" }],
+        diagram: {
+          ariaLabel: "Fiber Link 工作流系统图",
+          layers: [
+            {
+              title: "社区 / 插件入口",
+              items: ["社区应用", "插件触发器", "支持意图"],
+            },
+            {
+              title: "Fiber Link 服务层",
+              items: ["意图路由", "策略校验", "提现编排"],
+            },
+            {
+              title: "Redis 状态与重放保护层",
+              items: ["会话状态", "Nonce 窗口", "幂等缓存"],
+            },
+            {
+              title: "CKB Fiber 结算层",
+              items: ["通道更新", "结算证明", "提现就绪"],
+            },
+          ],
+          admin: {
+            title: "管理员运营看板",
+            items: ["风险控制", "审核队列", "审计时间线"],
+          },
+        },
       },
     },
   }),
@@ -61,7 +87,7 @@ vi.mock("../../components/EditorialImagePanel", () => ({
 
 describe("marketing support pages", () => {
   it("renders product imagery and how-it-works system diagram", () => {
-    render(<ProductPage />);
+    const { unmount } = render(<ProductPage />);
     expect(screen.getByAltText("社区支付路径流程图")).toHaveAttribute(
       "src",
       "/editorial/product-workflow.svg",
@@ -76,8 +102,17 @@ describe("marketing support pages", () => {
       screen.queryByAltText("Desk setup tracking community earnings"),
     ).not.toBeInTheDocument();
 
+    unmount();
     render(<HowItWorksPage />);
     expect(screen.getByTestId("workflow-system-diagram")).toBeInTheDocument();
+    expect(screen.getByText("社区 / 插件入口")).toBeInTheDocument();
+    expect(screen.getByText("意图路由")).toBeInTheDocument();
     expect(screen.getByText("社区接入 Fiber Link")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "申请 Fiber Link 抢先体验资格。" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText("Community / Plugin entry point"),
+    ).not.toBeInTheDocument();
   });
 });

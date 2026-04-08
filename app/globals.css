@@ -2005,30 +2005,6 @@ img { display: block; }
   left: 31%;
 }
 
-.ambient-flow-label {
-  position: absolute;
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(90, 96, 97, 0.85);
-}
-
-.ambient-flow-label-source {
-  top: 18%;
-  left: 9%;
-}
-
-.ambient-flow-label-routing {
-  top: 28%;
-  left: 44%;
-}
-
-.ambient-flow-label-settlement {
-  top: 42%;
-  left: 77%;
-}
-
 .workflow-system-diagram {
   position: relative;
   border-radius: 32px;
@@ -2042,14 +2018,15 @@ img { display: block; }
 }
 
 .workflow-system-grid {
-  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.95fr);
-  grid-template-areas:
-    "entry admin"
-    "service state"
-    "settlement settlement";
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
   gap: 14px;
+  align-items: start;
+}
+
+.workflow-system-main {
+  display: grid;
+  gap: 10px;
 }
 
 .workflow-band {
@@ -2067,9 +2044,9 @@ img { display: block; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #2480e0;
+  line-height: 1.45;
 }
 
-.workflow-chip-row,
 .workflow-band-body {
   display: flex;
   flex-wrap: wrap;
@@ -2077,7 +2054,6 @@ img { display: block; }
   margin-top: 10px;
 }
 
-.workflow-chip,
 .workflow-band-body span {
   display: inline-flex;
   align-items: center;
@@ -2092,50 +2068,23 @@ img { display: block; }
   border: 1px solid rgba(173, 179, 180, 0.18);
 }
 
-.workflow-band-entry { grid-area: entry; }
-.workflow-band-service { grid-area: service; }
-.workflow-band-state { grid-area: state; }
-.workflow-band-settlement { grid-area: settlement; }
-.workflow-band-admin { grid-area: admin; }
-
-.workflow-link {
-  position: absolute;
-  display: block;
-  pointer-events: none;
+.workflow-flow-divider {
+  width: 2px;
+  height: 28px;
+  justify-self: center;
   border-radius: 999px;
   background: linear-gradient(
     180deg,
-    rgba(36, 128, 224, 0.3) 0%,
-    rgba(36, 128, 224, 0.16) 100%
+    rgba(36, 128, 224, 0.18) 0%,
+    rgba(36, 128, 224, 0.5) 100%
   );
 }
 
-.workflow-link-entry-service {
-  top: 26%;
-  left: 22%;
-  width: 2px;
-  height: 56px;
-}
-
-.workflow-link-entry-admin {
-  top: 13%;
-  left: 52%;
-  width: 72px;
-  height: 2px;
-}
-
-.workflow-link-service-state {
-  top: 49%;
-  left: 56%;
-  width: 68px;
-  height: 2px;
-}
-
-.workflow-link-state-settlement {
-  top: 60%;
-  left: 72%;
-  width: 2px;
-  height: 50px;
+.workflow-band-admin {
+  height: 100%;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(248, 250, 250, 0.9) 100%);
+  border-style: dashed;
 }
 
 [data-theme="dark"] .ambient-signal-scene {
@@ -2164,10 +2113,6 @@ img { display: block; }
   box-shadow: 0 0 0 4px rgba(128, 206, 255, 0.3);
 }
 
-[data-theme="dark"] .ambient-flow-label {
-  color: rgba(216, 224, 230, 0.72);
-}
-
 [data-theme="dark"] .workflow-system-diagram {
   background:
     radial-gradient(circle at 8% 8%, rgba(58, 168, 248, 0.2), transparent 42%),
@@ -2181,18 +2126,22 @@ img { display: block; }
   border-color: rgba(200, 215, 225, 0.16);
 }
 
-[data-theme="dark"] .workflow-chip,
 [data-theme="dark"] .workflow-band-body span {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(200, 215, 225, 0.15);
 }
 
-[data-theme="dark"] .workflow-link {
+[data-theme="dark"] .workflow-flow-divider {
   background: linear-gradient(
     180deg,
-    rgba(128, 206, 255, 0.36) 0%,
-    rgba(128, 206, 255, 0.14) 100%
+    rgba(128, 206, 255, 0.2) 0%,
+    rgba(128, 206, 255, 0.55) 100%
   );
+}
+
+[data-theme="dark"] .workflow-band-admin {
+  background:
+    linear-gradient(180deg, rgba(30, 37, 42, 0.72) 0%, rgba(23, 29, 33, 0.92) 100%);
 }
 
 /* ════════════════════════════════════════
@@ -2308,16 +2257,10 @@ img { display: block; }
 
   .workflow-system-grid {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "entry"
-      "service"
-      "state"
-      "settlement"
-      "admin";
   }
 
-  .workflow-link {
-    display: none;
+  .workflow-band-admin {
+    height: auto;
   }
 }
 
@@ -2356,10 +2299,6 @@ img { display: block; }
 
   .ambient-signal-scene {
     min-height: 204px;
-  }
-
-  .ambient-flow-label {
-    font-size: 0.57rem;
   }
 
   .section-heading-inline {

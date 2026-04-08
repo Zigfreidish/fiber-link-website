@@ -190,6 +190,31 @@ export const translations = {
             "Creators request conversion or payout windows while operators keep operational oversight.",
         },
       ],
+      diagram: {
+        ariaLabel: "Fiber Link workflow system diagram",
+        layers: [
+          {
+            title: "Community / Plugin entry point",
+            items: ["Community apps", "Plugin triggers", "Support intents"],
+          },
+          {
+            title: "Fiber Link service layer",
+            items: ["Intent routing", "Policy checks", "Payout orchestration"],
+          },
+          {
+            title: "Redis state and replay protection",
+            items: ["Session state", "Nonce window", "Idempotency cache"],
+          },
+          {
+            title: "CKB Fiber settlement layer",
+            items: ["Channel updates", "Settlement proofs", "Withdrawal readiness"],
+          },
+        ],
+        admin: {
+          title: "Admin oversight surface",
+          items: ["Risk controls", "Approval queue", "Audit timeline"],
+        },
+      },
     },
     faq: {
       eyebrow: "FAQ",
@@ -451,6 +476,31 @@ export const translations = {
           description: "系统保留可控窗口，不让资金行为失控。",
         },
       ],
+      diagram: {
+        ariaLabel: "Fiber Link 工作流系统图",
+        layers: [
+          {
+            title: "社区 / 插件入口",
+            items: ["社区应用", "插件触发器", "支持意图"],
+          },
+          {
+            title: "Fiber Link 服务层",
+            items: ["意图路由", "策略校验", "提现编排"],
+          },
+          {
+            title: "Redis 状态与重放保护层",
+            items: ["会话状态", "Nonce 窗口", "幂等缓存"],
+          },
+          {
+            title: "CKB Fiber 结算层",
+            items: ["通道更新", "结算证明", "提现就绪"],
+          },
+        ],
+        admin: {
+          title: "管理员运营看板",
+          items: ["风险控制", "审核队列", "审计时间线"],
+        },
+      },
     },
     faq: {
       eyebrow: "常见问题",
@@ -646,6 +696,31 @@ export const translations = {
         { title: "残高と履歴", description: "収益は即時更新され、透明に蓄積されます。" },
         { title: "受け取りと管理", description: "運営側で受け取りや申請ルールを柔軟に管理します。" },
       ],
+      diagram: {
+        ariaLabel: "Fiber Link ワークフロー図",
+        layers: [
+          {
+            title: "コミュニティ / プラグイン入口",
+            items: ["コミュニティアプリ", "プラグイントリガー", "支援インテント"],
+          },
+          {
+            title: "Fiber Link サービスレイヤー",
+            items: ["インテントルーティング", "ポリシーチェック", "出金オーケストレーション"],
+          },
+          {
+            title: "Redis 状態 / リプレイ保護レイヤー",
+            items: ["セッション状態", "Nonce ウィンドウ", "冪等キャッシュ"],
+          },
+          {
+            title: "CKB Fiber 精算レイヤー",
+            items: ["チャネル更新", "精算証明", "出金準備"],
+          },
+        ],
+        admin: {
+          title: "管理者オーバーサイト面",
+          items: ["リスク制御", "承認キュー", "監査タイムライン"],
+        },
+      },
     },
     faq: {
       eyebrow: "FAQ",
@@ -832,6 +907,31 @@ export const translations = {
         { title: "수익 잔액 반영", description: "창작자의 수익 변동이 즉시 표시됩니다." },
         { title: "출금 관리", description: "출금 정책은 운영자가 통제 가능한 타이밍으로 배치됩니다." },
       ],
+      diagram: {
+        ariaLabel: "Fiber Link 워크플로 시스템 다이어그램",
+        layers: [
+          {
+            title: "커뮤니티 / 플러그인 진입점",
+            items: ["커뮤니티 앱", "플러그인 트리거", "후원 인텐트"],
+          },
+          {
+            title: "Fiber Link 서비스 레이어",
+            items: ["인텐트 라우팅", "정책 검증", "출금 오케스트레이션"],
+          },
+          {
+            title: "Redis 상태 / 리플레이 방지 레이어",
+            items: ["세션 상태", "Nonce 윈도우", "멱등 캐시"],
+          },
+          {
+            title: "CKB Fiber 정산 레이어",
+            items: ["채널 업데이트", "정산 증명", "출금 준비 상태"],
+          },
+        ],
+        admin: {
+          title: "관리자 감독 영역",
+          items: ["리스크 제어", "승인 대기열", "감사 타임라인"],
+        },
+      },
     },
     faq: {
       eyebrow: "FAQ",
