@@ -5,6 +5,7 @@ export const navItems = [
   { slug: "", key: "home" },
   { slug: "product", key: "product" },
   { slug: "how-it-works", key: "howItWorks" },
+  { slug: "faq", key: "faq" },
 ];
 
 export const translations = {
@@ -14,6 +15,7 @@ export const translations = {
       home: "Home",
       product: "Product",
       howItWorks: "How It Works",
+      faq: "FAQ",
       requestDemo: "Request Demo",
       source: "GitHub",
       privacy: "Privacy Policy",
@@ -130,6 +132,12 @@ export const translations = {
       visualTitle: "Creator economy dashboard",
       visualCaption:
         "A lightweight, operator-friendly view for tracking rewards and payout readiness.",
+      homeVisualTitle: "Community support session in action",
+      homeVisualCaption:
+        "A real community moment that shows creator support taking shape in the operator workflow.",
+      workflowVisualTitle: "Community payment workflow",
+      workflowVisualCaption:
+        "A clear view of how support actions move through Fiber Link into tracked payout and settlement.",
     },
     useCases: {
       eyebrow: "Use cases",
@@ -301,6 +309,7 @@ export const translations = {
       home: "首页",
       product: "产品",
       howItWorks: "工作原理",
+      faq: "常见问题",
       requestDemo: "抢先体验",
       source: "GitHub",
       privacy: "隐私政策",
@@ -391,6 +400,10 @@ export const translations = {
       ],
       visualTitle: "创作者数据看板",
       visualCaption: "聚焦创作者与运营可读的收益与支持状态。",
+      homeVisualTitle: "社区支持协作现场",
+      homeVisualCaption: "用真实社区场景说明创作者支持如何在运营侧落地。",
+      workflowVisualTitle: "社区支付路径流程图",
+      workflowVisualCaption: "用清晰的流程视图展示支持动作如何进入结算与提现。",
     },
     useCases: {
       eyebrow: "使用场景",
@@ -529,6 +542,7 @@ export const translations = {
       home: "ホーム",
       product: "プロダクト",
       howItWorks: "使い方",
+      faq: "よくある質問",
       requestDemo: "先行体験",
       source: "GitHub",
       privacy: "プライバシーポリシー",
@@ -606,6 +620,10 @@ export const translations = {
       ],
       visualTitle: "収益・支援ダッシュボード",
       visualCaption: "運営もクリエイターも把握しやすい表示を優先。",
+      homeVisualTitle: "コミュニティ支援の現場",
+      homeVisualCaption: "実際のコミュニティ場面で、支援が運営フローに組み込まれる様子を伝えます。",
+      workflowVisualTitle: "コミュニティ決済フロー",
+      workflowVisualCaption: "支援アクションが Fiber Link を通って追跡可能な精算へ進む流れを示します。",
     },
     useCases: {
       eyebrow: "ユースケース",
@@ -710,6 +728,7 @@ export const translations = {
       home: "홈",
       product: "제품",
       howItWorks: "작동 방식",
+      faq: "자주 묻는 질문",
       requestDemo: "얼리 액세스",
       source: "GitHub",
       privacy: "개인정보 처리방침",
@@ -787,6 +806,10 @@ export const translations = {
       ],
       visualTitle: "보상 현황 대시보드",
       visualCaption: "운영·크리에이터 모두가 빠르게 읽을 수 있는 구조입니다.",
+      homeVisualTitle: "커뮤니티 지원 협업 현장",
+      homeVisualCaption: "실제 커뮤니티 장면으로 창작자 지원이 운영 흐름에 녹아드는 모습을 보여줍니다.",
+      workflowVisualTitle: "커뮤니티 결제 흐름도",
+      workflowVisualCaption: "지원 액션이 Fiber Link를 거쳐 추적 가능한 정산 단계로 이어지는 경로를 보여줍니다.",
     },
     useCases: {
       eyebrow: "활용 사례",
