@@ -1,58 +1,59 @@
 "use client";
 
-import { FiArrowRight } from "react-icons/fi";
+import React from "react";
 import Link from "next/link";
 import { useLocale } from "../contexts/LocaleContext";
 import { useLocalePaths } from "../hooks/useLocalePaths";
-import FiberReveal from "../components/FiberReveal";
-import CommunityVisual from "../components/CommunityVisual";
+import WorkflowSystemDiagram from "../components/WorkflowSystemDiagram";
 
 const HowItWorksPage = () => {
   const { t, dict } = useLocale();
   const { localizePath } = useLocalePaths();
+  const steps = dict.howItWorks?.steps ?? [];
 
   return (
-    <FiberReveal className="section-wrap">
-      <section className="section">
-        <div className="section-intro">
-          <p className="eyebrow">{t("howItWorks.eyebrow")}</p>
-          <h1>{t("howItWorks.title")}</h1>
-          <p>{t("howItWorks.description")}</p>
-        </div>
-        <div className="timeline">
-          {dict.howItWorks.steps.map((step, index) => (
-            <article key={step.title} className="timeline-item card-surface" data-reveal>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section section-surface">
-        <CommunityVisual
-          query={dict.images.how.query}
-          title={t("product.visualTitle")}
-          description={t("howItWorks.description")}
-          fallback={dict.images.how.fallback}
-        />
-      </section>
-
-      <section className="section">
-        <div className="mini-cta compact">
-          <div>
-            <h2>{t("faq.cta")}</h2>
-            <p>{t("labels.comingSoon")}</p>
+    <main className="content-page">
+      <div className="page-stack">
+        <section className="page-section editorial-support-section" data-reveal>
+          <div className="page-hero">
+            <p className="section-eyebrow">{t("howItWorks.eyebrow")}</p>
+            <h1 className="page-title">{t("howItWorks.title")}</h1>
+            <p className="page-copy">{t("howItWorks.description")}</p>
           </div>
-          <Link className="btn-primary" href={localizePath("request-demo")}>
-            {t("hero.primary")} <FiArrowRight />
-          </Link>
-        </div>
-      </section>
-    </FiberReveal>
+
+          <div className="how-workflow-layout">
+            <WorkflowSystemDiagram />
+            <div className="editorial-stack">
+              {steps.map((step, index) => (
+                <article key={step.title} className="surface-panel">
+                  <span className="step-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="cta-band-section cta-band-section-embedded" data-reveal>
+          <div className="cta-band">
+            <div className="cta-band-copy">
+              <p className="section-eyebrow">{t("requestDemo.eyebrow")}</p>
+              <h2>{t("faq.cta")}</h2>
+              <p>{t("requestDemo.panelCopy")}</p>
+            </div>
+
+            <div className="cta-band-actions">
+              <Link className="btn-hero-primary" href={localizePath("request-demo")}>
+                {t("hero.primary")}
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 };
 

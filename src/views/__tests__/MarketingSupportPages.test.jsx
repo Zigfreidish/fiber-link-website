@@ -59,12 +59,8 @@ vi.mock("../../components/EditorialImagePanel", () => ({
   ),
 }));
 
-vi.mock("../../components/AmbientSignalScene", () => ({
-  default: () => <div data-testid="ambient-scene" />,
-}));
-
 describe("marketing support pages", () => {
-  it("renders fixed imagery with localized copy and motion scene", () => {
+  it("renders product imagery and how-it-works system diagram", () => {
     render(<ProductPage />);
     expect(screen.getByAltText("社区支付路径流程图")).toHaveAttribute(
       "src",
@@ -81,12 +77,7 @@ describe("marketing support pages", () => {
     ).not.toBeInTheDocument();
 
     render(<HowItWorksPage />);
-    expect(
-      screen.getByAltText("Fiber Network：社区支付通道架构。"),
-    ).toHaveAttribute("src", "/editorial/product-workflow.svg");
-    expect(
-      screen.queryByAltText("Team reviewing community operations"),
-    ).not.toBeInTheDocument();
-    expect(screen.getByTestId("ambient-scene")).toBeInTheDocument();
+    expect(screen.getByTestId("workflow-system-diagram")).toBeInTheDocument();
+    expect(screen.getByText("社区接入 Fiber Link")).toBeInTheDocument();
   });
 });
