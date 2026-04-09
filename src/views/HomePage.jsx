@@ -96,7 +96,11 @@ export default function HomePage() {
 
             <div className="editorial-split">
               <div data-reveal>
-                <EditorialImagePanel {...homeMedia} className="editorial-image-panel-home-reference" />
+                <EditorialImagePanel
+                  {...homeMedia}
+                  showCaption={false}
+                  className="editorial-image-panel-home-reference"
+                />
               </div>
               <div className="editorial-stack">
                 <div className="feature-grid-premium feature-grid-premium-stack">

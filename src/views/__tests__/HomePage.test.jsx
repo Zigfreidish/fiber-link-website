@@ -117,12 +117,7 @@ describe("HomePage", () => {
 
     const homeVisual = screen.getByAltText("创作者激励与收益面板");
     expect(homeVisual).toHaveAttribute("src", "/editorial/home-tip-received.jpg");
-    expect(
-      screen.getByRole("heading", { name: "创作者激励与收益面板" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("用更明确的激励场景，说明创作者支持、分发与收益沉淀如何在社区内形成闭环。"),
-    ).toBeInTheDocument();
+    expect(container.querySelector(".editorial-image-panel-home-reference .editorial-copy")).toBeNull();
     expect(container.querySelector(".home-editorial-split .section-heading[data-reveal]")).not.toBeNull();
     const featureGridStack = container.querySelector(".feature-grid-premium-stack");
     expect(featureGridStack).toBeInTheDocument();
