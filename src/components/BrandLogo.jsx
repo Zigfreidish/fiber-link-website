@@ -4,7 +4,7 @@ import React from "react";
 import { useTheme } from "../contexts/ThemeContext";
 
 const DEFAULT_SRC = "/brand/fiber-link-logo.png";
-const CHROME_DARK_SRC = "/brand/fiber-link-logo-solid-white.svg";
+const CHROME_DARK_SRC = "/brand/fiber-link-logo-outline-white.png";
 
 export default function BrandLogo({
   context = "chrome",

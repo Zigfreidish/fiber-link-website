@@ -11,14 +11,14 @@ vi.mock("../../contexts/ThemeContext", () => ({
 import { useTheme } from "../../contexts/ThemeContext";
 
 describe("BrandLogo", () => {
-  it('uses white solid logo in dark mode for context="chrome"', () => {
+  it('uses the inverted outline logo in dark mode for context="chrome"', () => {
     useTheme.mockReturnValue({ resolvedMode: "dark" });
 
     render(<BrandLogo context="chrome" alt="Fiber Link" data-testid="brand-logo" />);
 
     expect(screen.getByTestId("brand-logo")).toHaveAttribute(
       "src",
-      "/brand/fiber-link-logo-solid-white.svg",
+      "/brand/fiber-link-logo-outline-white.png",
     );
   });
 
@@ -33,13 +33,11 @@ describe("BrandLogo", () => {
     );
   });
 
-  it("uses a dark chrome logo asset without evenodd outline cutouts", () => {
+  it("ships a raster dark chrome logo asset for the inverted outline mark", () => {
     const logo = readFileSync(
-      "public/brand/fiber-link-logo-solid-white.svg",
-      "utf8",
+      "public/brand/fiber-link-logo-outline-white.png",
     );
 
-    expect(logo).not.toContain("fill-rule");
-    expect(logo).not.toContain("clip-rule");
+    expect(logo.byteLength).toBeGreaterThan(0);
   });
 });
