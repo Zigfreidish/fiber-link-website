@@ -397,12 +397,12 @@ export const translations = {
       closeMenu: "关闭菜单",
     },
     hero: {
-      eyebrow: "Launch your community rewards early",
+      eyebrow: "面向在线社区的即时打赏层",
       title: "Fiber Link",
       headlinePrimary: "支付",
       headlineSecondary: "无所限制",
       description:
-        "先加入等待列表，先于他人抢先体验产品。提交抢先体验申请后，我们会尽快完成审核并安排开通。",
+        "面向在线社区的开放即时打赏层，一键接入，快速启用创作者激励与结算能力。",
       primary: "抢先体验",
       secondary: "hello@studiox@gmail.com",
       contact: "hello@studiox@gmail.com",
@@ -625,6 +625,7 @@ export const translations = {
         placeholderOrg: "产品社区",
         placeholderNotes: "请说明你的社区类型、希望验证的场景，以及最关心的指标。",
         success: "申请已收到。我们会评估你的场景，并在一周内联系你安排抢先体验。",
+        formSubtitle: "告诉我们你的社区与计划验证的场景。我们会在一周内完成评估并与你联系。",
       },
       roleOptions: ["创始人 / 主理人", "管理员", "运营", "创作者", "投资人 / 合作方", "其他"],
     },
@@ -690,12 +691,12 @@ export const translations = {
       closeMenu: "メニューを閉じる",
     },
     hero: {
-      eyebrow: "Launch early and stay in control",
+      eyebrow: "オンラインコミュニティ向け即時投げ銭レイヤー",
       title: "Fiber Link",
       headlinePrimary: "決済",
       headlineSecondary: "制限なく",
       description:
-        "ウェイトリストに参加し、誰よりも早く製品を体験できます。先行体験を申請いただくと、審査後にご案内します。",
+        "オンラインコミュニティ向けのオープンな即時投げ銭レイヤー。ワンクリックで導入でき、クリエイター報酬と精算の仕組みをすばやく立ち上げられます。",
       primary: "先行体験",
       secondary: "hello@studiox@gmail.com",
       contact: "hello@studiox@gmail.com",
@@ -740,7 +741,7 @@ export const translations = {
     },
 
     product: {
-      eyebrow: "製品",
+      eyebrow: "製品概要",
       title: "コミュニティプラットフォームのための決済レイヤー。",
       intro: "既存のコミュニティ基盤に組み込めるため、全体体験を崩さずに収益化を開始できます。",
       cards: [
@@ -767,9 +768,9 @@ export const translations = {
       ],
     },
     howItWorks: {
-      eyebrow: "Fiber Network",
-      title: "Fiber Network はコミュニティ向け決済チャネルです。",
-      description: "Fiber Network はコミュニティの既存 UX を残したまま、貢献価値を決済フローへ変換する支払いチャネルを提供します。",
+      eyebrow: "仕組み",
+      title: "Fiber Network: コミュニティ決済チャネルのアーキテクチャ。",
+      description: "Fiber Network はクリエイター支援の決済機能を差し込み可能なチャネルとして提供し、コミュニティ本来の体験を保ったまま支払いと分配を実現します。",
       steps: [
         { title: "接続", description: "管理者がプラットフォームに接続し、支援ルールを有効化。" },
         { title: "現場での支援", description: "投稿・スレッド内で即座に支援が行われます。" },
@@ -838,7 +839,7 @@ export const translations = {
       },
     },
     faq: {
-      eyebrow: "FAQ",
+      eyebrow: "よくある質問",
       title: "導入前の確認ポイント。",
       items: [
         { question: "ウォレット型プロダクトですか？", answer: "いいえ。コミュニティ決済レイヤーとして機能し、ウォレットを前面化しません。" },
@@ -871,6 +872,7 @@ export const translations = {
         placeholderOrg: "Knowledge Circle",
         placeholderNotes: "確認したいユースケースとコミュニティ運用条件を教えてください。",
         success: "申請を受け付けました。内容を確認のうえ、1週間以内に先行体験のご案内を差し上げます。",
+        formSubtitle: "コミュニティの概要と検証したい内容を教えてください。1週間以内を目安に確認のうえご連絡します。",
       },
       roleOptions: ["創業者", "管理者", "コミュニティ運営", "クリエイター", "パートナー", "その他"],
     },
@@ -936,12 +938,12 @@ export const translations = {
       closeMenu: "메뉴 닫기",
     },
     hero: {
-      eyebrow: "기다림 없이 먼저 확인하세요",
+      eyebrow: "온라인 커뮤니티를 위한 즉시 후원 레이어",
       title: "Fiber Link",
       headlinePrimary: "결제",
       headlineSecondary: "제한 없이",
       description:
-        "대기열에 참여하면 누구보다 먼저 제품을 체험할 수 있습니다. 얼리 액세스를 신청하시면 검토 후 안내해 드립니다.",
+        "온라인 커뮤니티를 위한 개방형 즉시 후원 레이어입니다. 원클릭으로 연결하고, 창작자 보상과 정산 흐름을 빠르게 시작할 수 있습니다.",
       primary: "얼리 액세스",
       secondary: "hello@studiox@gmail.com",
       contact: "hello@studiox@gmail.com",
@@ -1014,8 +1016,8 @@ export const translations = {
     },
     howItWorks: {
       eyebrow: "작동 방식",
-      title: "Fiber Network 결제 채널 아키텍처.",
-      description: "Fiber Network는 기존 커뮤니티 UI를 변경하지 않고, 창작자 보상/결제 채널을 연결하는 결제 레이어를 제공합니다.",
+      title: "Fiber Network: 커뮤니티 결제 채널 아키텍처.",
+      description: "Fiber Network는 크리에이터 보상 기능을 플러그형 결제 채널로 연결해, 커뮤니티 고유의 사용자 경험을 유지한 채 결제와 분배를 처리합니다.",
       steps: [
         { title: "커뮤니티 연결", description: "운영자가 통합 설정을 마치고 결제 규칙을 적용합니다." },
         { title: "콘텐츠 내 지지", description: "멤버는 컨텍스트 내에서 바로 팁/지원을 보낼 수 있습니다." },
@@ -1084,7 +1086,7 @@ export const translations = {
       },
     },
     faq: {
-      eyebrow: "FAQ",
+      eyebrow: "자주 묻는 질문",
       title: "도입 전 확인해야 할 항목들.",
       items: [
         { question: "지갑 상품인가요?", answer: "아닙니다. 커뮤니티 결제 레이어이며, 일반 멤버는 복잡한 지갑 조작이 필요 없습니다." },
