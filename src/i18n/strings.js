@@ -109,7 +109,7 @@ export const translations = {
 
     product: {
       eyebrow: "The product",
-      title: "A payment layer for communities, not a power-user wallet.",
+      title: "A payment layer for community platforms.",
       intro:
         "Install Fiber Link as a hosted service in your community stack and activate sustainable creator economics fast.",
       cards: [
@@ -132,9 +132,9 @@ export const translations = {
       visualTitle: "Creator economy dashboard",
       visualCaption:
         "A lightweight, operator-friendly view for tracking rewards and payout readiness.",
-      homeVisualTitle: "Community support session in action",
+      homeVisualTitle: "Creator rewards and payout workspace",
       homeVisualCaption:
-        "A real community moment that shows creator support taking shape in the operator workflow.",
+        "A clearer payout-focused view showing support, distribution, and tracked earnings inside the community loop.",
       workflowVisualTitle: "Community payment workflow",
       workflowVisualCaption:
         "A clear view of how support actions move through Fiber Link into tracked payout and settlement.",
@@ -194,25 +194,70 @@ export const translations = {
         ariaLabel: "Fiber Link workflow system diagram",
         layers: [
           {
-            title: "Community / Plugin entry point",
-            items: ["Community apps", "Plugin triggers", "Support intents"],
+            eyebrow: "User interface",
+            icon: "community",
+            title: "Fiber Link Discourse Plugin",
+            description:
+              "Primary entry point, allowing community members to initiate tips and micropayments seamlessly.",
           },
           {
-            title: "Fiber Link service layer",
-            items: ["Intent routing", "Policy checks", "Payout orchestration"],
+            eyebrow: "Backend service",
+            icon: "service",
+            title: "Fiber Link Service",
+            description:
+              "Core engine managing request logic, balance checks, and payment processing safeguards.",
           },
           {
-            title: "Redis state and replay protection",
-            items: ["Session state", "Nonce window", "Idempotency cache"],
+            eyebrow: "Data / cache layer",
+            icon: "cache",
+            title: "Redis",
+            description:
+              "Shared nonce and replay cache that protects requests across service instances.",
           },
           {
-            title: "CKB Fiber settlement layer",
-            items: ["Channel updates", "Settlement proofs", "Withdrawal readiness"],
+            eyebrow: "Settlement layer / on-chain",
+            icon: "settlement",
+            title: "CKB Fiber Network",
+            description:
+              "Settlement path that finalizes micropayments through the CKB Fiber Network.",
+          },
+        ],
+        steps: [
+          {
+            number: "1",
+            title: "Transaction initiation",
+            description:
+              "A user triggers a tip or micropayment action through the Fiber Link Discourse Plugin inside the community forum.",
+          },
+          {
+            number: "2",
+            title: "Request processing & security check",
+            description:
+              "The Fiber Link Service receives the request and queries Redis to validate nonces and ensure it is not a replay.",
+          },
+          {
+            number: "3",
+            title: "Invariant & fund verification",
+            description:
+              "The service verifies sufficient funds and confirms the transaction preserves system balance rules.",
+          },
+          {
+            number: "4",
+            title: "Blockchain settlement",
+            description:
+              "Once validated, the request is forwarded to the Fiber Network Node for final settlement on CKB Fiber.",
           },
         ],
         admin: {
-          title: "Admin oversight surface",
-          items: ["Risk controls", "Approval queue", "Audit timeline"],
+          eyebrow: "Management & oversight",
+          icon: "admin",
+          title: "Operation Admin Dashboard",
+          description:
+            "Dedicated operator surface for monitoring payment flows, setting rate limits, and reviewing critical activity.",
+          stepNumber: "5",
+          stepTitle: "Administrative oversight",
+          stepDescription:
+            "Operators use the dashboard in real time to monitor flow status, check limits, and retain an audit trail.",
         },
       },
     },
@@ -403,7 +448,7 @@ export const translations = {
 
     product: {
       eyebrow: "产品说明",
-      title: "我们提供面向社区的支付层，而不是钱包产品。",
+      title: "面向社区平台的支付层。",
       intro:
         "将 Fiber Link 集成到你的社区后，可快速启动打赏和提现机制，降低交易门槛。",
       cards: [
@@ -425,8 +470,8 @@ export const translations = {
       ],
       visualTitle: "创作者数据看板",
       visualCaption: "聚焦创作者与运营可读的收益与支持状态。",
-      homeVisualTitle: "社区支持协作现场",
-      homeVisualCaption: "用真实社区场景说明创作者支持如何在运营侧落地。",
+      homeVisualTitle: "创作者激励与收益面板",
+      homeVisualCaption: "用更明确的激励场景，说明创作者支持、分发与收益沉淀如何在社区内形成闭环。",
       workflowVisualTitle: "社区支付路径流程图",
       workflowVisualCaption: "用清晰的流程视图展示支持动作如何进入结算与提现。",
     },
@@ -480,25 +525,60 @@ export const translations = {
         ariaLabel: "Fiber Link 工作流系统图",
         layers: [
           {
-            title: "社区 / 插件入口",
-            items: ["社区应用", "插件触发器", "支持意图"],
+            eyebrow: "用户界面",
+            icon: "community",
+            title: "Fiber Link Discourse 插件",
+            description: "作为社区成员发起打赏与小额支付的前端入口。",
           },
           {
-            title: "Fiber Link 服务层",
-            items: ["意图路由", "策略校验", "提现编排"],
+            eyebrow: "后端服务",
+            icon: "service",
+            title: "Fiber Link 服务",
+            description: "负责请求逻辑、余额约束与支付处理保护。",
           },
           {
-            title: "Redis 状态与重放保护层",
-            items: ["会话状态", "Nonce 窗口", "幂等缓存"],
+            eyebrow: "数据 / 缓存层",
+            icon: "cache",
+            title: "Redis",
+            description: "作为共享 nonce 与重放保护缓存，保障多实例请求安全。",
           },
           {
-            title: "CKB Fiber 结算层",
-            items: ["通道更新", "结算证明", "提现就绪"],
+            eyebrow: "结算层 / 链上",
+            icon: "settlement",
+            title: "CKB Fiber Network",
+            description: "负责最终的小额支付结算与链上确认。",
+          },
+        ],
+        steps: [
+          {
+            number: "1",
+            title: "交易发起",
+            description: "成员在社区内通过 Fiber Link 插件直接发起打赏或小额支付动作。",
+          },
+          {
+            number: "2",
+            title: "请求处理与安全检查",
+            description: "Fiber Link 服务接收请求后，会先查询 Redis 校验 nonce 并确认不是重放请求。",
+          },
+          {
+            number: "3",
+            title: "约束与余额校验",
+            description: "系统验证用户余额是否充足，并确认交易仍满足账本与系统约束。",
+          },
+          {
+            number: "4",
+            title: "区块链结算",
+            description: "验证通过后，请求会被转发到 Fiber Network Node，在 CKB Fiber 上完成最终结算。",
           },
         ],
         admin: {
-          title: "管理员运营看板",
-          items: ["风险控制", "审核队列", "审计时间线"],
+          eyebrow: "管理与监督",
+          icon: "admin",
+          title: "独立管理员后台",
+          description: "供运营侧持续监控支付流转、设定限额并查看关键状态。",
+          stepNumber: "5",
+          stepTitle: "管理侧监督",
+          stepDescription: "管理员通过后台实时观察流转状态、检查限额，并保留完整审计线索。",
         },
       },
     },
@@ -661,7 +741,7 @@ export const translations = {
 
     product: {
       eyebrow: "製品",
-      title: "コミュニティのための決済レイヤー。",
+      title: "コミュニティプラットフォームのための決済レイヤー。",
       intro: "既存のコミュニティ基盤に組み込めるため、全体体験を崩さずに収益化を開始できます。",
       cards: [
         { title: "運営者向け", description: "設定・レート・支払いルールを統合管理し、導入速度を高めます。" },
@@ -670,8 +750,8 @@ export const translations = {
       ],
       visualTitle: "収益・支援ダッシュボード",
       visualCaption: "運営もクリエイターも把握しやすい表示を優先。",
-      homeVisualTitle: "コミュニティ支援の現場",
-      homeVisualCaption: "実際のコミュニティ場面で、支援が運営フローに組み込まれる様子を伝えます。",
+      homeVisualTitle: "クリエイター報酬と収益パネル",
+      homeVisualCaption: "支援、分配、収益の蓄積がコミュニティ内でどう循環するかを、より明確に示します。",
       workflowVisualTitle: "コミュニティ決済フロー",
       workflowVisualCaption: "支援アクションが Fiber Link を通って追跡可能な精算へ進む流れを示します。",
     },
@@ -700,25 +780,60 @@ export const translations = {
         ariaLabel: "Fiber Link ワークフロー図",
         layers: [
           {
-            title: "コミュニティ / プラグイン入口",
-            items: ["コミュニティアプリ", "プラグイントリガー", "支援インテント"],
+            eyebrow: "ユーザーインターフェース",
+            icon: "community",
+            title: "Fiber Link Discourse プラグイン",
+            description: "コミュニティ内でチップや少額決済を起動するフロント側の入口です。",
           },
           {
-            title: "Fiber Link サービスレイヤー",
-            items: ["インテントルーティング", "ポリシーチェック", "出金オーケストレーション"],
+            eyebrow: "バックエンドサービス",
+            icon: "service",
+            title: "Fiber Link サービス",
+            description: "リクエスト処理、残高制約、決済保護ロジックを担う中核サービスです。",
           },
           {
-            title: "Redis 状態 / リプレイ保護レイヤー",
-            items: ["セッション状態", "Nonce ウィンドウ", "冪等キャッシュ"],
+            eyebrow: "データ / キャッシュ層",
+            icon: "cache",
+            title: "Redis",
+            description: "Nonce 共有とリプレイ防止のためのキャッシュとして機能します。",
           },
           {
-            title: "CKB Fiber 精算レイヤー",
-            items: ["チャネル更新", "精算証明", "出金準備"],
+            eyebrow: "精算層 / オンチェーン",
+            icon: "settlement",
+            title: "CKB Fiber Network",
+            description: "最終的な少額決済の精算を CKB Fiber 上で完了させます。",
+          },
+        ],
+        steps: [
+          {
+            number: "1",
+            title: "トランザクション開始",
+            description: "コミュニティ内でユーザーが Fiber Link プラグイン経由でチップ操作を開始します。",
+          },
+          {
+            number: "2",
+            title: "リクエスト処理とセキュリティ確認",
+            description: "Fiber Link サービスが Redis を参照し、nonce とリプレイ可否を確認します。",
+          },
+          {
+            number: "3",
+            title: "残高と不変条件の検証",
+            description: "十分な残高があることと、トランザクションがシステム制約を保つことを確認します。",
+          },
+          {
+            number: "4",
+            title: "ブロックチェーン精算",
+            description: "検証後、Fiber Network Node が CKB Fiber 上で最終精算を行います。",
           },
         ],
         admin: {
-          title: "管理者オーバーサイト面",
-          items: ["リスク制御", "承認キュー", "監査タイムライン"],
+          eyebrow: "管理と監督",
+          icon: "admin",
+          title: "運用管理ダッシュボード",
+          description: "運営側が決済フローを監視し、上限設定や重要状態を把握するための管理面です。",
+          stepNumber: "5",
+          stepTitle: "管理側オーバーサイト",
+          stepDescription: "管理者はダッシュボード上で状態をリアルタイムに確認し、制限値と監査履歴を維持します。",
         },
       },
     },
@@ -872,7 +987,7 @@ export const translations = {
 
     product: {
       eyebrow: "제품 소개",
-      title: "커뮤니티용 결제 레이어, 지갑형 제품이 아님.",
+      title: "커뮤니티 플랫폼을 위한 결제 레이어.",
       intro: "기존 커뮤니티 서비스 안에 통합되는 방식으로 빠르게 시행 가능합니다.",
       cards: [
         { title: "운영자용", description: "정책, 수수료, 지급 규칙을 통합 설정하고 운영 효율을 높입니다." },
@@ -881,8 +996,8 @@ export const translations = {
       ],
       visualTitle: "보상 현황 대시보드",
       visualCaption: "운영·크리에이터 모두가 빠르게 읽을 수 있는 구조입니다.",
-      homeVisualTitle: "커뮤니티 지원 협업 현장",
-      homeVisualCaption: "실제 커뮤니티 장면으로 창작자 지원이 운영 흐름에 녹아드는 모습을 보여줍니다.",
+      homeVisualTitle: "크리에이터 보상 및 수익 패널",
+      homeVisualCaption: "후원, 분배, 수익 축적이 커뮤니티 안에서 어떻게 선명한 흐름을 이루는지 보여줍니다.",
       workflowVisualTitle: "커뮤니티 결제 흐름도",
       workflowVisualCaption: "지원 액션이 Fiber Link를 거쳐 추적 가능한 정산 단계로 이어지는 경로를 보여줍니다.",
     },
@@ -911,25 +1026,60 @@ export const translations = {
         ariaLabel: "Fiber Link 워크플로 시스템 다이어그램",
         layers: [
           {
-            title: "커뮤니티 / 플러그인 진입점",
-            items: ["커뮤니티 앱", "플러그인 트리거", "후원 인텐트"],
+            eyebrow: "사용자 인터페이스",
+            icon: "community",
+            title: "Fiber Link Discourse 플러그인",
+            description: "커뮤니티 안에서 팁과 소액 결제를 시작하는 프론트 엔트리 포인트입니다.",
           },
           {
-            title: "Fiber Link 서비스 레이어",
-            items: ["인텐트 라우팅", "정책 검증", "출금 오케스트레이션"],
+            eyebrow: "백엔드 서비스",
+            icon: "service",
+            title: "Fiber Link 서비스",
+            description: "요청 처리, 잔액 제약, 결제 보호 로직을 담당하는 핵심 서비스입니다.",
           },
           {
-            title: "Redis 상태 / 리플레이 방지 레이어",
-            items: ["세션 상태", "Nonce 윈도우", "멱등 캐시"],
+            eyebrow: "데이터 / 캐시 레이어",
+            icon: "cache",
+            title: "Redis",
+            description: "nonce 공유와 리플레이 방지를 위한 공용 캐시로 동작합니다.",
           },
           {
-            title: "CKB Fiber 정산 레이어",
-            items: ["채널 업데이트", "정산 증명", "출금 준비 상태"],
+            eyebrow: "정산 레이어 / 온체인",
+            icon: "settlement",
+            title: "CKB Fiber Network",
+            description: "최종 소액 결제를 CKB Fiber에서 마무리하는 정산 경로입니다.",
+          },
+        ],
+        steps: [
+          {
+            number: "1",
+            title: "거래 시작",
+            description: "멤버가 커뮤니티 안에서 Fiber Link 플러그인을 통해 팁 또는 소액 결제를 시작합니다.",
+          },
+          {
+            number: "2",
+            title: "요청 처리 및 보안 확인",
+            description: "Fiber Link 서비스는 Redis를 조회해 nonce와 리플레이 여부를 먼저 검증합니다.",
+          },
+          {
+            number: "3",
+            title: "잔액 및 제약 조건 검증",
+            description: "사용자 잔액이 충분한지, 그리고 거래가 시스템 제약을 유지하는지 확인합니다.",
+          },
+          {
+            number: "4",
+            title: "블록체인 정산",
+            description: "검증 후 Fiber Network Node가 CKB Fiber에서 최종 정산을 수행합니다.",
           },
         ],
         admin: {
-          title: "관리자 감독 영역",
-          items: ["리스크 제어", "승인 대기열", "감사 타임라인"],
+          eyebrow: "관리 및 감독",
+          icon: "admin",
+          title: "운영 관리자 대시보드",
+          description: "운영 측이 결제 흐름을 모니터링하고 한도와 핵심 상태를 관리하는 전용 화면입니다.",
+          stepNumber: "5",
+          stepTitle: "관리 측 감독",
+          stepDescription: "관리자는 대시보드에서 상태를 실시간으로 확인하고 제한값과 감사 이력을 유지합니다.",
         },
       },
     },

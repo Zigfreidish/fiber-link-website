@@ -3,3 +3,7 @@ Thumbs.db
 node_modules/
 dist/
 .next/
+bun.lockb
+.superpowers/
+.playwright-cli/
+docs/superpowers/

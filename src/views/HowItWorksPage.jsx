@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useLocale } from "../contexts/LocaleContext";
 import { useLocalePaths } from "../hooks/useLocalePaths";
+import FiberReveal from "../components/FiberReveal";
 import WorkflowSystemDiagram from "../components/WorkflowSystemDiagram";
 
 const HowItWorksPage = () => {
@@ -14,44 +15,50 @@ const HowItWorksPage = () => {
   return (
     <main className="content-page">
       <div className="page-stack">
-        <section className="page-section editorial-support-section" data-reveal>
-          <div className="page-hero">
-            <p className="section-eyebrow">{t("howItWorks.eyebrow")}</p>
-            <h1 className="page-title">{t("howItWorks.title")}</h1>
-            <p className="page-copy">{t("howItWorks.description")}</p>
-          </div>
-
-          <div className="how-workflow-layout">
-            <WorkflowSystemDiagram />
-            <div className="editorial-stack">
-              {steps.map((step, index) => (
-                <article key={step.title} className="surface-panel">
-                  <span className="step-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="cta-band-section cta-band-section-embedded" data-reveal>
-          <div className="cta-band">
-            <div className="cta-band-copy">
-              <p className="section-eyebrow">{t("requestDemo.eyebrow")}</p>
-              <h2>{t("requestDemo.title")}</h2>
-              <p>{t("requestDemo.panelCopy")}</p>
+        <FiberReveal>
+          <section className="page-section editorial-support-section">
+            <div className="page-hero" data-reveal>
+              <p className="section-eyebrow">{t("howItWorks.eyebrow")}</p>
+              <h1 className="page-title">{t("howItWorks.title")}</h1>
+              <p className="page-copy">{t("howItWorks.description")}</p>
             </div>
 
-            <div className="cta-band-actions">
-              <Link className="btn-hero-primary" href={localizePath("request-demo")}>
-                {t("hero.primary")}
-              </Link>
+            <div className="how-workflow-layout how-workflow-layout-reference">
+              <div className="workflow-diagram-stage" data-reveal>
+                <WorkflowSystemDiagram />
+              </div>
+              <div className="editorial-stack workflow-step-stack">
+                {steps.map((step, index) => (
+                  <article key={step.title} className="surface-panel" data-reveal>
+                    <span className="step-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </FiberReveal>
+
+        <FiberReveal>
+          <section className="cta-band-section cta-band-section-embedded">
+            <div className="cta-band" data-reveal>
+              <div className="cta-band-copy">
+                <p className="section-eyebrow">{t("requestDemo.eyebrow")}</p>
+                <h2>{t("requestDemo.title")}</h2>
+                <p>{t("requestDemo.panelCopy")}</p>
+              </div>
+
+              <div className="cta-band-actions">
+                <Link className="btn-hero-primary" href={localizePath("request-demo")}>
+                  {t("hero.primary")}
+                </Link>
+              </div>
+            </div>
+          </section>
+        </FiberReveal>
       </div>
     </main>
   );

@@ -1,97 +1,51 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+const metrics = [
+  { value: "$42.8k", width: "86%" },
+  { value: "1.3k", width: "62%" },
+  { value: "96%", width: "74%" },
+];
 
-const UNSPLASH_BASE = "https://api.unsplash.com/photos/random";
+const ledgerRows = [0, 1, 2, 3];
 
-const REMOTE_FALLBACKS = {
-  "creator economy community":
-    "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1400&q=80",
-  "community creators economy":
-    "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1400&q=80",
-  "creator payout dashboard":
-    "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1400&q=80",
-  "payment dashboard":
-    "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1400&q=80",
-  "creator team collaboration":
-    "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80",
-  "team collaboration":
-    "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80",
-  "online community":
-    "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80",
-  "online community creators":
-    "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1400&q=80",
-  "community app":
-    "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80",
-  "analytics chart":
-    "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&w=1400&q=80",
-  "team building":
-    "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1400&q=80",
-  "digital collaboration":
-    "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1400&q=80",
-  "teamwork workspace":
-    "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1400&q=80",
-  "financial dashboard":
-    "https://images.unsplash.com/photo-1636957240016-d6dc6f0d9e34?auto=format&fit=crop&w=1400&q=80",
-  "payment interface":
-    "https://images.unsplash.com/photo-1551288049-bebda4d4f2d7?auto=format&fit=crop&w=1400&q=80",
-};
-
-const isRemoteUrl = (value = "") => /^https?:\/\//.test(value);
-
-const fallbackImage = (query = "", fallback = "/images/home-fallback.svg") => {
-  const key = (query || "").toLowerCase();
-  const curated = REMOTE_FALLBACKS[key];
-  return curated || (isRemoteUrl(fallback) ? fallback : fallback || "/images/home-fallback.svg");
-};
-
-const CommunityVisual = ({ query, title, description, fallback }) => {
-  const [src, setSrc] = useState(() => fallbackImage(query, fallback));
-  const [loading, setLoading] = useState(false);
-  const unsplashKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
-  const backupSrc = useMemo(() => fallbackImage(query, fallback), [query, fallback]);
-
-  useEffect(() => {
-    setSrc(backupSrc);
-    if (!unsplashKey) {
-      setLoading(false);
-      return;
-    }
-
-    const controller = new AbortController();
-    const run = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(
-          `${UNSPLASH_BASE}?query=${encodeURIComponent(query)}&orientation=landscape&client_id=${unsplashKey}`,
-          { signal: controller.signal },
-        );
-        if (!response.ok) throw new Error("Unsplash unavailable");
-        const data = await response.json();
-        const url = data?.urls?.small || backupSrc;
-        if (url) setSrc(url);
-      } catch {
-        setSrc(backupSrc);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    run();
-    return () => controller.abort();
-  }, [query, unsplashKey, backupSrc]);
-
+const CommunityVisual = ({ title, description }) => {
   return (
     <figure className="visual-card">
-      <div className={`visual-overlay ${loading ? "visual-loading" : ""}`} />
-      <img
-        src={src}
-        alt={title}
-        className="visual-media"
-        loading="lazy"
-        onError={() => setSrc(backupSrc)}
-      />
-      <figcaption>
+      <span className="visual-orb visual-orb-a" aria-hidden="true" />
+      <span className="visual-orb visual-orb-b" aria-hidden="true" />
+
+      <div className="visual-window">
+        <div className="visual-window-top" aria-hidden="true">
+          <span className="visual-window-dot visual-window-dot-warm" />
+          <span className="visual-window-dot visual-window-dot-cool" />
+          <span className="visual-window-dot visual-window-dot-soft" />
+        </div>
+
+        <div className="visual-metric-grid" aria-hidden="true">
+          {metrics.map((item) => (
+            <div key={item.value} className="visual-metric-card">
+              <span className="visual-metric-label" />
+              <strong>{item.value}</strong>
+              <span className="visual-metric-bar" style={{ width: item.width }} />
+            </div>
+          ))}
+        </div>
+
+        <div className="visual-ledger" aria-hidden="true">
+          {ledgerRows.map((row) => (
+            <div key={row} className="visual-ledger-row">
+              <span className="visual-ledger-avatar" />
+              <div className="visual-ledger-lines">
+                <span className="visual-ledger-line" />
+                <span className="visual-ledger-line visual-ledger-line-short" />
+              </div>
+              <span className="visual-ledger-amount" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <figcaption className="visual-caption">
         <strong>{title}</strong>
         <span>{description}</span>
       </figcaption>

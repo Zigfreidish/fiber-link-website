@@ -1,10 +1,10 @@
 export const editorialMedia = {
   home: {
-    src: "/editorial/home-community-asian.jpg",
-    alt: "Asian community members collaborating during a creator support session",
+    src: "/editorial/home-tip-received.jpg",
+    alt: "Community post showing a creator tip received inside the feed",
     eyebrow: "For operators",
-    title: "Launch support without wallet migration.",
-    body: "Ground the value proposition in a real community scene instead of a generic office photo.",
+    title: "Track creator rewards, balances, and payout readiness.",
+    body: "Use a clearer creator payout workspace instead of a generic collaboration visual.",
   },
   product: {
     src: "/editorial/product-workflow.svg",

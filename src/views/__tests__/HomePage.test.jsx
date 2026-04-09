@@ -20,15 +20,18 @@ vi.mock("../../contexts/LocaleContext", () => ({
         "hero.primary": "抢先体验",
         "hero.learnMore": "了解更多",
         "product.eyebrow": "产品说明",
-        "product.title": "我们提供面向社区的支付层，而不是钱包产品。",
+        "product.title": "面向社区平台的支付层。",
         "product.intro": "将 Fiber Link 集成到你的社区后，可快速启动打赏和提现机制。",
         "product.visualTitle": "旧的产品视觉标题",
         "product.visualCaption": "旧的产品视觉说明。",
-        "product.homeVisualTitle": "社区支持协作现场",
-        "product.homeVisualCaption": "用真实社区场景说明创作者支持如何在运营侧落地。",
+        "product.homeVisualTitle": "创作者激励与收益面板",
+        "product.homeVisualCaption": "用更明确的激励场景，说明创作者支持、分发与收益沉淀如何在社区内形成闭环。",
         "howItWorks.eyebrow": "工作原理",
         "howItWorks.title": "Fiber Network：社区支付通道架构。",
         "howItWorks.description": "Fiber Network 将创作者支付能力作为可插拔通道接入。",
+        "useCases.eyebrow": "使用场景",
+        "useCases.title": "适用于内容与社群高度活跃的场景。",
+        "useCases.description": "无论是垂类社区还是兴趣社区，都能把真实互动转换为真实收益。",
         "faq.eyebrow": "常见问题",
         "faq.title": "先回答常见疑问。",
         "faq.cta": "如果你有独特的场景，我们愿意先帮你画一版流程。",
@@ -72,26 +75,68 @@ vi.mock("../../components/AnimatedGradientBadge", () => ({
 vi.mock("../../components/Announcements", () => ({
   default: () => <div data-testid="announcements">announcements</div>,
 }));
-vi.mock("../../components/AmbientSignalScene", () => ({
-  default: () => <div data-testid="ambient-scene" />,
+vi.mock("../../components/FiberReveal", () => ({
+  default: ({ children, className = "" }) => <div className={className}>{children}</div>,
 }));
 
 describe("HomePage", () => {
   it("keeps the hero CTA path and renders localized editorial content", () => {
     const { container } = render(<HomePage />);
 
+    expect(container.querySelector("#product-overview.home-editorial-split")).not.toBeNull();
+    expect(container.querySelector(".page-stack.home-stack")).toHaveClass("home-stack-spacious");
+
     const heroActions = container.querySelector(".hero-actions");
     expect(heroActions).not.toBeNull();
+    expect(heroActions).toHaveClass("hero-actions-equal");
+    const heroPrimaryLink = within(heroActions).getByRole("link", { name: "抢先体验" });
+    const heroSecondaryLink = within(heroActions).getByRole("link", { name: "了解更多" });
+    expect(heroPrimaryLink).toHaveClass("btn-hero-wide");
+    expect(heroSecondaryLink).toHaveClass("btn-hero-wide");
+    expect(heroSecondaryLink).toHaveAttribute("href", "https://github.com/Keith-CY/fiber-link");
+    expect(heroSecondaryLink).toHaveAttribute("target", "_blank");
+    expect(heroSecondaryLink).toHaveAttribute("rel", "noopener noreferrer");
+    expect(container.querySelector(".hero-highlights")).toBeNull();
+
+    const ctaBandActions = container.querySelector(".cta-band-actions");
+    expect(ctaBandActions).not.toBeNull();
+    expect(ctaBandActions).toHaveClass("cta-band-actions-equal");
+    const ctaBandPrimaryLink = within(ctaBandActions).getByRole("link", { name: "抢先体验" });
+    const ctaBandSecondaryLink = within(ctaBandActions).getByRole("link", { name: "了解更多" });
+    expect(ctaBandPrimaryLink).toHaveClass("btn-hero-wide");
+    expect(ctaBandSecondaryLink).toHaveClass("btn-hero-wide");
+    expect(ctaBandSecondaryLink).toHaveAttribute("href", "https://github.com/Keith-CY/fiber-link");
+    expect(ctaBandSecondaryLink).toHaveAttribute("target", "_blank");
+    expect(ctaBandSecondaryLink).toHaveAttribute("rel", "noopener noreferrer");
+
+    const inlineLearnMoreLink = container.querySelector(".text-link");
+    expect(inlineLearnMoreLink).not.toBeNull();
+    expect(inlineLearnMoreLink).toHaveAttribute("href", "https://github.com/Keith-CY/fiber-link");
+    expect(inlineLearnMoreLink).toHaveAttribute("target", "_blank");
+    expect(inlineLearnMoreLink).toHaveAttribute("rel", "noopener noreferrer");
+
+    const homeVisual = screen.getByAltText("创作者激励与收益面板");
+    expect(homeVisual).toHaveAttribute("src", "/editorial/home-tip-received.jpg");
     expect(
-      within(heroActions).getByRole("link", { name: "了解更多" }),
-    ).toHaveAttribute("href", "/zh/product");
-    expect(screen.getByAltText("社区支持协作现场")).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { name: "社区支持协作现场" }),
+      screen.getByRole("heading", { name: "创作者激励与收益面板" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText("用真实社区场景说明创作者支持如何在运营侧落地。"),
+      screen.getByText("用更明确的激励场景，说明创作者支持、分发与收益沉淀如何在社区内形成闭环。"),
     ).toBeInTheDocument();
-    expect(screen.getByTestId("ambient-scene")).toBeInTheDocument();
+    expect(container.querySelector(".home-editorial-split .section-heading[data-reveal]")).not.toBeNull();
+    const featureGridStack = container.querySelector(".feature-grid-premium-stack");
+    expect(featureGridStack).toBeInTheDocument();
+    expect(featureGridStack).toHaveClass("feature-grid-premium");
+    expect(featureGridStack.querySelectorAll(".surface-panel[data-reveal]")).toHaveLength(3);
+    expect(featureGridStack.querySelectorAll(".feature-stack-copy")).toHaveLength(3);
+    expect(screen.getByText("适用于内容与社群高度活跃的场景。")).toBeInTheDocument();
+    expect(
+      screen.getByText("无论是垂类社区还是兴趣社区，都能把真实互动转换为真实收益。"),
+    ).toBeInTheDocument();
+    expect(container.querySelectorAll(".use-case-grid .use-case-card[data-reveal]")).toHaveLength(1);
+    expect(container.querySelectorAll(".step-grid .step-card[data-reveal]")).toHaveLength(1);
+    expect(container.querySelector(".page-section-announcements[data-reveal]")).not.toBeNull();
+    expect(container.querySelector(".cta-band[data-reveal]")).not.toBeNull();
+    expect(screen.queryByText("先回答常见疑问。")).not.toBeInTheDocument();
   });
 });

@@ -15,7 +15,7 @@ const LABELS = {
 };
 
 export default function LocaleDropdown() {
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
   const { switchLocalePath } = useLocalePaths();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -32,12 +32,14 @@ export default function LocaleDropdown() {
   return (
     <div ref={ref} className="locale-dd-wrap">
       <button
+        type="button"
         className={`locale-dd-trigger${open ? " open" : ""}`}
         onClick={() => setOpen((v) => !v)}
-        aria-label="Switch language"
         aria-expanded={open}
+        aria-haspopup="menu"
       >
         <FiGlobe size={15} />
+        <span className="sr-only">{t("labels.locale")}: </span>
         <span className="locale-dd-cur">{LABELS[locale]?.short ?? locale.toUpperCase()}</span>
       </button>
 

@@ -14,7 +14,6 @@ export default function AppHeader() {
   const pathname = usePathname();
 
   const navLinks = [
-    { slug: "product", label: t("nav.product") },
     { slug: "how-it-works", label: t("nav.howItWorks") },
     { slug: "faq", label: t("nav.faq") },
   ];
@@ -23,7 +22,6 @@ export default function AppHeader() {
     <header className="app-header">
       <div className="app-header-inner">
         <div className="app-header-main">
-          {/* ── left: logo + brand ── */}
           <Link className="app-brand" href={`/${locale}`}>
             <BrandLogo
               context="chrome"
@@ -51,12 +49,10 @@ export default function AppHeader() {
           </nav>
         </div>
 
-        {/* ── right: request demo + locale dropdown + theme dropdown ── */}
         <div className="app-header-tools">
           <Link className="app-header-cta" href={localizePath("request-demo")}>
             {t("nav.requestDemo")}
           </Link>
-
           <LocaleDropdown />
           <ThemeDropdown />
         </div>

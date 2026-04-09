@@ -1,6 +1,7 @@
 import React from "react";
+import { readFileSync } from "node:fs";
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import BrandLogo from "../BrandLogo";
 
 vi.mock("../../contexts/ThemeContext", () => ({
@@ -30,5 +31,15 @@ describe("BrandLogo", () => {
       "src",
       "/brand/fiber-link-logo.png",
     );
+  });
+
+  it("uses a dark chrome logo asset without evenodd outline cutouts", () => {
+    const logo = readFileSync(
+      "public/brand/fiber-link-logo-solid-white.svg",
+      "utf8",
+    );
+
+    expect(logo).not.toContain("fill-rule");
+    expect(logo).not.toContain("clip-rule");
   });
 });

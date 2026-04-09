@@ -33,12 +33,14 @@ export default function ThemeDropdown() {
   return (
     <div ref={ref} className="theme-dd-wrap">
       <button
+        type="button"
         className={`locale-dd-trigger${open ? " open" : ""}`}
         onClick={() => setOpen((v) => !v)}
-        aria-label={t("labels.theme")}
         aria-expanded={open}
+        aria-haspopup="menu"
       >
         <ActiveIcon size={14} />
+        <span className="sr-only">{t("labels.theme")}: </span>
         <span className="locale-dd-cur">{activeLabel}</span>
       </button>
 

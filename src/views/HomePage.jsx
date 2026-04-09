@@ -10,10 +10,12 @@ import ShutterText from "../components/ShutterText";
 import AnimatedGradientBadge from "../components/AnimatedGradientBadge";
 import Announcements from "../components/Announcements";
 import EditorialImagePanel from "../components/EditorialImagePanel";
-import AmbientSignalScene from "../components/AmbientSignalScene";
+import FiberReveal from "../components/FiberReveal";
 import { editorialMedia } from "../data/editorialMedia";
 
 const ease = [0.16, 1, 0.3, 1];
+const PRODUCT_SECTION_ID = "product-overview";
+const SOURCE_URL = "https://github.com/Keith-CY/fiber-link";
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 22, filter: "blur(4px)" },
   animate: { opacity: 1, y: 0, filter: "blur(0px)" },
@@ -34,7 +36,6 @@ export default function HomePage() {
   const productCards = dict.product?.cards ?? [];
   const useCases = dict.useCases?.cases ?? [];
   const steps = dict.howItWorks?.steps ?? [];
-  const faqItems = dict.faq?.items ?? [];
 
   return (
     <main className="home-main">
@@ -68,131 +69,133 @@ export default function HomePage() {
           {t("hero.tagline")}
         </motion.p>
 
-        <motion.div className="hero-actions" {...fadeUp(0.52)}>
-          <Link className="btn-hero-primary" href={localizePath("request-demo")}>
+        <motion.div className="hero-actions hero-actions-equal" {...fadeUp(0.52)}>
+          <Link className="btn-hero-primary btn-hero-wide" href={localizePath("request-demo")}>
             {t("hero.primary")}
           </Link>
-          <Link
-            className="btn-hero-secondary"
-            href={localizePath("product")}
+          <a
+            className="btn-hero-secondary btn-hero-wide"
+            href={SOURCE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             {t("hero.learnMore")}
-          </Link>
+          </a>
         </motion.div>
 
-        <motion.ul className="hero-highlights" {...fadeUp(0.62)}>
-          {(dict.hero?.highlights ?? []).map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </motion.ul>
       </section>
 
-      <div className="page-stack home-stack">
-        <section className="page-section home-editorial-split" data-reveal>
-          <div className="section-heading">
-            <p className="section-eyebrow">{t("product.eyebrow")}</p>
-            <h2 className="section-title">{t("product.title")}</h2>
-            <p className="section-copy">{t("product.intro")}</p>
-          </div>
+      <div className="page-stack home-stack home-stack-spacious">
+        <FiberReveal>
+          <section id={PRODUCT_SECTION_ID} className="page-section home-editorial-split">
+            <div className="section-heading" data-reveal>
+              <p className="section-eyebrow">{t("product.eyebrow")}</p>
+              <h2 className="section-title">{t("product.title")}</h2>
+              <p className="section-copy">{t("product.intro")}</p>
+            </div>
 
-          <div className="editorial-split">
-            <EditorialImagePanel {...homeMedia} />
-            <div className="editorial-stack">
-              <AmbientSignalScene />
-              <div className="feature-grid-premium">
-                {productCards.map((item, index) => (
-                  <article key={item.title} className="surface-panel">
-                    <span className="info-card-index">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </article>
-                ))}
+            <div className="editorial-split">
+              <div data-reveal>
+                <EditorialImagePanel {...homeMedia} className="editorial-image-panel-home-reference" />
+              </div>
+              <div className="editorial-stack">
+                <div className="feature-grid-premium feature-grid-premium-stack">
+                  {productCards.map((item, index) => (
+                    <article key={item.title} className="surface-panel" data-reveal>
+                      <span className="info-card-index">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div className="feature-stack-copy">
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="use-case-grid">
-            {useCases.map((item) => (
-              <article key={item.title} className="use-case-card">
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="page-section" data-reveal>
-          <div className="section-heading section-heading-inline">
-            <div>
-              <p className="section-eyebrow">{t("howItWorks.eyebrow")}</p>
-              <h2 className="section-title">{t("howItWorks.title")}</h2>
-              <p className="section-copy">{t("howItWorks.description")}</p>
+            <div className="section-heading home-use-cases-heading" data-reveal>
+              <p className="section-eyebrow">{t("useCases.eyebrow")}</p>
+              <h3 className="section-title">{t("useCases.title")}</h3>
+              <p className="section-copy">{t("useCases.description")}</p>
             </div>
 
-            <Link className="text-link" href={localizePath("how-it-works")}>
-              {t("hero.learnMore")}
-            </Link>
-          </div>
+            <div className="use-case-grid">
+              {useCases.map((item) => (
+                <article key={item.title} className="use-case-card" data-reveal>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </FiberReveal>
 
-          <div className="step-grid">
-            {steps.map((step, index) => (
-              <article key={step.title} className="step-card">
-                <span className="step-number">{String(index + 1).padStart(2, "0")}</span>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+        <FiberReveal>
+          <section className="page-section">
+            <div className="section-heading section-heading-inline" data-reveal>
+              <div>
+                <p className="section-eyebrow">{t("howItWorks.eyebrow")}</p>
+                <h2 className="section-title">{t("howItWorks.title")}</h2>
+                <p className="section-copy">{t("howItWorks.description")}</p>
+              </div>
 
-        <section className="page-section" data-reveal>
-          <div className="section-heading section-heading-inline">
-            <div>
-              <p className="section-eyebrow">{t("faq.eyebrow")}</p>
-              <h2 className="section-title">{t("faq.title")}</h2>
-              <p className="section-copy">{t("faq.cta")}</p>
+              <a
+                className="text-link"
+                href={SOURCE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("hero.learnMore")}
+              </a>
             </div>
 
-            <Link className="text-link" href={localizePath("faq")}>
-              {t("nav.faq")}
-            </Link>
-          </div>
+            <div className="step-grid">
+              {steps.map((step, index) => (
+                <article key={step.title} className="step-card" data-reveal>
+                  <span className="step-number">{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </FiberReveal>
 
-          <div className="faq-preview-grid">
-            {faqItems.map((item) => (
-              <article key={item.question} className="faq-preview-card">
-                <h3>{item.question}</h3>
-                <p>{item.answer}</p>
-              </article>
-            ))}
-          </div>
-        </section>
       </div>
 
-      <section className="page-section page-section-muted page-section-announcements">
-        <Announcements />
-      </section>
+      <FiberReveal>
+        <section className="page-section page-section-muted page-section-announcements" data-reveal>
+          <Announcements />
+        </section>
+      </FiberReveal>
 
-      <section className="cta-band-section">
-        <div className="cta-band">
-          <div className="cta-band-copy">
-            <p className="section-eyebrow">{t("requestDemo.eyebrow")}</p>
-            <h2>{t("requestDemo.title")}</h2>
-            <p>{t("requestDemo.description")}</p>
-          </div>
+      <FiberReveal>
+        <section className="cta-band-section">
+          <div className="cta-band" data-reveal>
+            <div className="cta-band-copy">
+              <p className="section-eyebrow">{t("requestDemo.eyebrow")}</p>
+              <h2>{t("requestDemo.title")}</h2>
+              <p>{t("requestDemo.description")}</p>
+            </div>
 
-          <div className="cta-band-actions">
-            <Link className="btn-hero-primary" href={localizePath("request-demo")}>
-              {t("hero.primary")}
-            </Link>
-            <Link className="btn-hero-secondary" href={localizePath("product")}>
-              {t("hero.learnMore")}
-            </Link>
+            <div className="cta-band-actions cta-band-actions-equal">
+              <Link className="btn-hero-primary btn-hero-wide" href={localizePath("request-demo")}>
+                {t("hero.primary")}
+              </Link>
+              <a
+                className="btn-hero-secondary btn-hero-wide"
+                href={SOURCE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("hero.learnMore")}
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </FiberReveal>
     </main>
   );
 }
